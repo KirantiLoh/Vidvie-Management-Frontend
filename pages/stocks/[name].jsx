@@ -34,6 +34,7 @@ const StockPage = () => {
     const [condition, setCondition] = useState('')
 
     const goToNextPage = () => {
+      e.preventDefault()
       if (nextPage) {
           setCurrentPage(nextPage)
           setPageNumber(pageNumber + 1)  
@@ -41,6 +42,7 @@ const StockPage = () => {
     }
 
     const goToPrevPage = () => {
+      e.preventDefault()
         if (previousPage) {
             setCurrentPage(prevPage)
             setPageNumber(pageNumber - 1)  
