@@ -41,7 +41,6 @@ const RecentTasks = () => {
     }
 
     const goToNextPage = () => {
-      e.preventDefault()
         if (nextPage) {
             setCurrentPage(nextPage)
             setPageNumber(pageNumber + 1)  
@@ -49,7 +48,6 @@ const RecentTasks = () => {
     }
 
     const goToPrevPage = () => {
-      e.preventDefault()
         if (prevPage) {
             setCurrentPage(prevPage)
             setPageNumber(pageNumber - 1)  

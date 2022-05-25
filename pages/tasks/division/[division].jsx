@@ -77,7 +77,6 @@ const TaskByDivision = () => {
     }
   
     const goToNextTaskPage = async () => {
-      e.preventDefault()
       if (tasksNextPage) {
         setTasksCurrentPage(tasksNextPage)
         setTasksPageNumber(tasksPageNumber + 1)
@@ -85,7 +84,6 @@ const TaskByDivision = () => {
     }
   
     const goToPrevTaskPage = async () => {
-      e.preventDefault()
       if (tasksPrevPage) {
         setTasksCurrentPage(tasksPrevPage)
         setTasksPageNumber(tasksPageNumber - 1)
@@ -93,7 +91,6 @@ const TaskByDivision = () => {
     }
   
     const goToNextRequestPage = async () => {
-      e.preventDefault()
       if (requestsNextPage) {
         setRequestsCurrentPage(requestsNextPage)
         setRequestsPageNumber(requestsPageNumber + 1)
@@ -101,7 +98,6 @@ const TaskByDivision = () => {
     }
   
     const goToPrevRequestPage = async () => {
-      e.preventDefault()
       if (requestsPrevPage) {
         setRequestsCurrentPage(requestsPrevPage)
         setRequestsPageNumber(requestsPageNumber - 1)

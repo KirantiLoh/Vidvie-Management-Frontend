@@ -34,7 +34,7 @@ const StockPage = () => {
     const [condition, setCondition] = useState('')
 
     const goToNextPage = () => {
-      e.preventDefault()
+      
       if (nextPage) {
           setCurrentPage(nextPage)
           setPageNumber(pageNumber + 1)  
@@ -42,7 +42,7 @@ const StockPage = () => {
     }
 
     const goToPrevPage = () => {
-      e.preventDefault()
+      
         if (previousPage) {
             setCurrentPage(prevPage)
             setPageNumber(pageNumber - 1)  
@@ -61,7 +61,7 @@ const StockPage = () => {
     }
 
     const handleSubmit = async (e) => {
-      e.preventDefault()
+      
       if (!itemName || !stock || !condition || !itemFunction) return
       try {
         let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, {
