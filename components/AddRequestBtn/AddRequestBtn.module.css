@@ -1,0 +1,15 @@
+.addRequestBtn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 3rem;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    width: 64px;
+    text-align: center;
+    margin: 15px;
+}
+
+.addRequestBtn:hover {
+    background-color: var(--primary-text-color);
+}

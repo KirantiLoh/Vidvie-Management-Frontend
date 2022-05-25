@@ -1,0 +1,12 @@
+.members {
+    padding: 0 10px;
+    list-style: none;
+}
+
+.members li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--tertiary-background-color);
+    border-radius: 3px;
+    transition: .3s;
+}

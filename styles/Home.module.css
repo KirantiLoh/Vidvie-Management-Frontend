@@ -1,0 +1,5 @@
+.filterForm {
+    margin: 10px;
+    overflow: hidden;
+    transition: .5s;
+}

@@ -1,0 +1,78 @@
+.requests {
+    list-style: none;
+}
+
+.requests input {
+    width: 39px;
+    height: 39px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.requestContainer,
+.requests li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--tertiary-background-color);
+    border-radius: 3px;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+}
+
+.request {
+    flex: 1 1 auto;
+}
+
+.requests li:hover {
+    background-color: var(--secondary-background-color);
+}
+
+.requestTitle {
+    max-width: 20ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+    font-size: 1.4rem;
+}
+
+.upperDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.priorityAndStatus {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 5px 0;
+}
+
+.priority,
+.status {
+    padding: 5px 15px;
+    margin-right: 10px;
+    border-radius: 30px;
+    width: max-content;
+}
+
+.leaderForm {
+    margin: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+@media screen and (max-width: 560px) {
+    .priority,
+    .status {
+        margin: none;
+        margin-right: 10px;
+    }
+
+    .requestTitle {
+        width: 100%;
+    }
+}

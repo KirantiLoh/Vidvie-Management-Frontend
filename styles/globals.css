@@ -1,0 +1,262 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+:root {
+  --primary-background-color: #121212;
+  --secondary-background-color: #242424;
+  --tertiary-background-color: #333333;
+  --primary-text-color: #fff;
+  --secondary-text-color:rgba(255, 255, 255, 0.74);
+  --primary-color: #F36D25;
+  --sidenav-bg-color: var(--primary-background-color);
+  --modal-error-background-color: #fff1f1;
+  --modal-error-border-color: #f6d1d3;  
+  --modal-error-text-color: #9f0000;
+  --modal-success-background-color: #d4edda;
+  --modal-success-text-color: #155724;
+  --modal-success-border-color: #b5e6c4;
+}
+
+
+a {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius:30px;
+  background-color: var(--primary-color);
+}
+
+body {
+  background-color: var(--primary-background-color);
+}
+
+.main-content {
+  background-color: var(--primary-background-color);
+  overflow-y: hidden;
+  color: var(--primary-text-color);
+  display: flex;
+}
+
+.children {
+  flex: 1 1 calc(100vw - 200px);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#chk,
+.showMenuBtn,
+.hideMenuBtn {
+    display: none;
+    color: var(--primary-text-color);
+    transition: .3s;
+}
+
+.showMenuBtn:hover,
+.hideMenuBtn:hover {
+  color: var(--primary-color);
+}
+
+.title {
+  font-size: 2.5rem;
+  margin: 5px 0;
+  color: var(--primary-color);
+}
+
+.paginations {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.paginations li {
+  font-size: 1.5rem;
+  margin: 10px;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.pagination-button:hover {
+  background-color: var(--primary-color);
+}
+
+.primary-btn {
+  margin: 10px 5px;
+  padding: 10px 30px;
+  font-size: 1.25rem;
+  border: 3px var(--primary-color) solid;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  transition: .3s;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.secondary-btn {
+  margin: 10px 5px;
+  padding: 10px 30px;
+  font-size: 1.25rem;
+  border: 3px var(--primary-color) solid;
+  border-radius: 3px;
+  background-color: transparent;
+  color: var(--primary-color);
+  transition: .3s;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  display: block;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  outline: none;
+  border: none;
+  border-bottom: 3px var(--primary-color) solid;
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+  resize: vertical;
+  font-size: 1.1rem;
+}
+
+input[type="datetime-local"] {
+  resize: none;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    border: 3px var(--primary-text-color) solid;
+    cursor: pointer;
+    transition: .3s;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: inherit;
+  height: inherit;
+  border: none;
+  background-color: transparent;
+  z-index: -1;
+  transition: .3s;
+}
+
+input[type="checkbox"]:hover {
+  border: 3px var(--primary-color) solid;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border: 3px var(--primary-color) solid;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "\2713";
+}
+
+
+input[type="datetime-local"],
+input[type="date"] {
+  color-scheme: dark;
+}
+
+select {
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+::placeholder {
+  color: var(--secondary-text-color)
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upper h3 {
+  font-size: 1.4rem;
+}
+
+.upper span {
+  font-size: 2rem;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: .3s
+}
+
+.upper span:hover {
+  color: var(--primary-color);
+}
+
+.whatsapp-link {
+  font-size: 2rem;
+  transition: .3s;
+}
+
+.whatsapp-link:hover {
+  color: #25d366;
+}
+
+form {
+  margin: 10px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-background-color: #121212;
+    --secondary-background-color: #242424;
+    --tertiary-background-color: #333333;
+    --primary-text-color: #fff;
+    --secondary-text-color:rgba(255, 255, 255, 0.74);
+    --sidenav-bg-color: var(--primary-background-color)
+  }
+  input[type="datetime-local"],
+  input[type="date"] {
+    color-scheme: dark;
+  }
+}
+*/
+
+@media screen and (max-width: 560px) {
+  .showMenuBtn {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 2rem;
+  }
+  #chk:checked~nav {
+    left: 0;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}

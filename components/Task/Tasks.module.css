@@ -1,0 +1,46 @@
+.tasks {
+    list-style: none;
+}
+
+.tasks li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--tertiary-background-color);
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.tasks li:hover {
+    background-color: var(--secondary-background-color);
+}
+
+.taskTitle {
+    max-width: 20ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+    font-size: 1.4rem;
+}
+
+.upperDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.priorityAndStatus {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 5px 0;
+}
+
+.priority,
+.status {
+    padding: 5px 15px;
+    margin-right: 10px;
+    border-radius: 30px;
+    width: max-content;
+}
