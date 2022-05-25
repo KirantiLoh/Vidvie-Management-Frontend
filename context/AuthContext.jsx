@@ -59,7 +59,7 @@ export const AuthProvider = ({children}) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
+                }
             })
             let data = await response.json()
             if (response.status === 200) {
