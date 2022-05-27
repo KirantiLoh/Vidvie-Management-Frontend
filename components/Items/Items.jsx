@@ -46,6 +46,7 @@ const Items = ({items, division, isLeader, showActionForm, setRefetching}) => {
 
     const setConditionColor = (condition) => {
       if (condition === 'Bad') return '#910810'
+      if (condition === 'Second') return '#df9a00'
       if (condition === 'Good') return '#4d9b00' 
     }
 
@@ -78,6 +79,7 @@ const Items = ({items, division, isLeader, showActionForm, setRefetching}) => {
             <select required id={styles['action']} value={updatedValue} onChange={e => setUpdatedValue(e.target.value)}>
               <option value="" disabled hidden>Choose Here</option>
               <option value="Good">Good</option>
+              <option value="Second">Second</option>
               <option value="Bad">Bad</option>
             </select>
             ) : null}
