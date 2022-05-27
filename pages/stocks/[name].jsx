@@ -111,6 +111,7 @@ const StockPage = () => {
             <select value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value="" hidden disabled>Condition</option>
               <option value="Good">Good</option>
+              <option value="Second">Second</option>
               <option value="Bad">Bad</option>
             </select>
             <button className="primary-btn" type='submit'>Add</button>
