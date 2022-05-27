@@ -58,6 +58,26 @@ const TaskByDivision = () => {
             setTasks([])
         }
     }
+
+    const clearTaskFilter = () => {
+      setTaskPriority('')
+      setTaskStatus('')
+      setTaskStartDate('')
+      setTaskEndDate('')
+      setTasksCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/division/${division}?priority=${taskPriority}&status=${taskStatus}&date_added_before=${taskEndDate}&date_added_after=${taskStartDate}`)
+      setTasksPageNumber(1)
+      setShowTaskFilterForm(false)
+    }
+
+    const clearRequestFilter = () => {
+      setRequestPriority('')
+      setRequestStatus('')
+      setRequestStartDate('')
+      setRequestEndDate('')
+      setRequestsCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/requests/division/${division}?priority=${requestPriority}&status=${requestStatus}&date_added_before=${requestEndDate}&date_added_after=${requestStartDate}`)
+      setRequestsPageNumber(1)
+      setShowRequestFilterForm(false)
+    }
   
     const fetchRequests = async () => {
         try {
@@ -148,7 +168,7 @@ const TaskByDivision = () => {
         <div className='upper'>
           <h2>Tasks</h2>
           <div>
-            {tasks.length > 0 ? <span onClick={() => setShowTaskFilterForm(!showTaskFilterForm)}><FontAwesomeIcon icon={faFilter}/></span> : null}
+            <span onClick={() => setShowTaskFilterForm(!showTaskFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
           </div>
         </div>
         <form onSubmit={e => filterTaskResult(e)} className={styles.filterForm} style={{height: showTaskFilterForm ? '414px' : '0'}}>
@@ -173,6 +193,7 @@ const TaskByDivision = () => {
           <label htmlFor="">End Date</label>
           <input type="date" value={taskEndDate} onChange={e => setTaskEndDate(e.target.value)}/>
           <button className="primary-btn">Filter</button>
+          <button className="secondary-btn" onClick={() => clearTaskFilter()}>Clear</button>
         </form>
         <Tasks tasks={tasks} inTaskbyDivisionPage={true}/>
         {tasks.length > 0 ?
@@ -184,7 +205,7 @@ const TaskByDivision = () => {
         <div className='upper'>
           <h2>Requests</h2>
           <div>
-          {requests.length > 0 ? <span onClick={() => setShowRequestFilterForm(!showRequestFilterForm)}><FontAwesomeIcon icon={faFilter}/></span> : null}
+            <span onClick={() => setShowRequestFilterForm(!showRequestFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
             {requests.length > 0 && requests[0]?.requestor_division?.leader?.user.username === user.username ? <span onClick={() => setShowActionForm(!showActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
           </div>
         </div>
@@ -210,6 +231,7 @@ const TaskByDivision = () => {
           <label htmlFor="">End Date</label>
           <input type="date" value={requestEndDate} onChange={e => setRequestEndDate(e.target.value)}/>
           <button className="primary-btn">Filter</button>
+          <button className="secondary-btn" onClick={() => clearRequestFilter()}>Clear</button>
         </form>
         <Requests setShowActionForm={setShowActionForm} showActionForm={showActionForm} setRefetching={setRefetchRequest} division={division} requests={requests} isLeader={requests[0]?.requestor_division?.leader?.user.username === user.username} inRequestbyDivisionPage={true}/>
         {requests.length > 0 ?

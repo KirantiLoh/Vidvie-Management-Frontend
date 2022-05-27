@@ -30,6 +30,16 @@ const RecentTasks = () => {
       setShowFilterForm(false)
     }
 
+    const clearFilter = () => {
+      setPriority('')
+      setStatus('')
+      setStartDate('')
+      setEndDate('')
+      setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks?priority=${priority}&status=${status}&date_added_before=${endDate}&date_added_after=${startDate}`)
+      setPageNumber(1)
+      setShowFilterForm(false)
+    }
+
     const getRecentTasks = async () => {
         let response = await axios.get(currentPage)
         if (response.status === 200) {
@@ -87,6 +97,7 @@ const RecentTasks = () => {
           <label htmlFor="">End Date</label>
           <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}/>
           <button className="primary-btn">Filter</button>
+          <button className="secondary-btn" onClick={() => clearFilter()}>Clear</button>
         </form>
         
         <Tasks tasks={recentTasks}/>

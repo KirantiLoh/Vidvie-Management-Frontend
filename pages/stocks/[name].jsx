@@ -61,7 +61,7 @@ const StockPage = () => {
     }
 
     const handleSubmit = async (e) => {
-      
+      e.preventDefault()
       if (!itemName || !stock || !condition || !itemFunction) return
       try {
         let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, {
@@ -126,7 +126,13 @@ const StockPage = () => {
           </div>
           <Items division={name} setRefetching={setRefetching} items={data} isLeader={user.username === data[0].division?.leader?.user.username} showActionForm={showActionForm}/>
         </> : 
-        <h3>This Division has no items...</h3>}
+        <div className="upper">
+          <h3>This division has no items...</h3>
+          <div>
+            {user.leader_of.toLowerCase().replace(' ', '-') === name ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
+          </div>
+        </div>
+        }
         {data?.length > 0  ? 
         <ul className="paginations">
             {previousPage ? <li onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
