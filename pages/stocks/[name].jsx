@@ -44,7 +44,7 @@ const StockPage = () => {
     const goToPrevPage = () => {
       
         if (previousPage) {
-            setCurrentPage(prevPage)
+            setCurrentPage(previousPage)
             setPageNumber(pageNumber - 1)  
         }
     }
