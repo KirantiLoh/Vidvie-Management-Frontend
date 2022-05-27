@@ -8,10 +8,22 @@
     background-color: var(--tertiary-background-color);
     border-radius: 3px;
     transition: .3s;
+    display: flex;
 }
 
 .tasks li:hover {
     background-color: var(--secondary-background-color);
+}
+
+.taskContainer {
+    flex: 1 1 auto;
+}
+
+.tasks input {
+    width: 39px;
+    height: 39px;
+    text-align: center;
+    border-radius: 50%;
 }
 
 .taskTitle {

@@ -93,7 +93,7 @@ const AddRequestForm = () => {
                 <option value="" disabled hidden>Choose here</option>
                 {user.division === 'Branding' && divisionsChoices.length > 0 ? divisionsChoices.map((divisionChoice) => {
                     return  <option key={divisionChoice.id} value={divisionChoice.name}>{divisionChoice.name}</option>
-                }) : null}
+                }) : <option value={user.division}>{user.division}</option>}
                 {user.division === 'Direksi' ? <option value="Vidvie">Vidvie</option> : null}
             </select>
             <label htmlFor={styles['requestee']}>Requesting to</label>

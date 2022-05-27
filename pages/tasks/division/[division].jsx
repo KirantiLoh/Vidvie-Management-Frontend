@@ -27,7 +27,10 @@ const TaskByDivision = () => {
     const [taskStatus, setTaskStatus] = useState('')
     const [taskStartDate, setTaskStartDate] = useState('')
     const [taskEndDate, setTaskEndDate] = useState('')
-  
+    const [showTaskActionForm, setShowTaskActionForm] = useState(false)
+    const [refetchTasksRequest, setRefetchTasksRequest] = useState(false)
+
+
     const [requests, setRequests] = useState([])
     const [requestsCurrentPage, setRequestsCurrentPage] = useState('')
     const [requestsPrevPage, setRequestsPrevPage] = useState('')
@@ -37,9 +40,9 @@ const TaskByDivision = () => {
     const [requestStatus, setRequestStatus] = useState('')
     const [requestStartDate, setRequestStartDate] = useState('')
     const [requestEndDate, setRequestEndDate] = useState('')
+    const [showRequestActionForm, setShowRequestActionForm] = useState(false)
 
-    const [refetchRequest, setRefetchRequest] = useState(false)
-    const [showActionForm, setShowActionForm] = useState(false)
+    const [refetchRequestsRequest, setRefetchRequestsRequest] = useState(false)
     const [showTaskFilterForm, setShowTaskFilterForm] = useState(false)
     const [showRequestFilterForm, setShowRequestFilterForm] = useState(false)
   
@@ -57,6 +60,7 @@ const TaskByDivision = () => {
         } catch (err) {
             setTasks([])
         }
+        setRefetchTasksRequest(false)
     }
 
     const clearTaskFilter = () => {
@@ -93,7 +97,7 @@ const TaskByDivision = () => {
             } catch (err) {
                 setRequests([])
             }
-            setRefetchRequest(false)
+            setRefetchRequestsRequest(false)
     }
   
     const goToNextTaskPage = async () => {
@@ -154,13 +158,13 @@ const TaskByDivision = () => {
         if (tasksCurrentPage) {
             fetchTasks()
         }
-    }, [tasksCurrentPage])
+    }, [tasksCurrentPage, refetchTasksRequest])
 
     useEffect(() => {
         if (requestsCurrentPage) {
             fetchRequests()
         }
-    }, [requestsCurrentPage, refetchRequest])
+    }, [requestsCurrentPage, refetchRequestsRequest])
 
   return (
     <div>
@@ -169,6 +173,7 @@ const TaskByDivision = () => {
           <h2>Tasks</h2>
           <div>
             <span onClick={() => setShowTaskFilterForm(!showTaskFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
+            {tasks.length > 0 && tasks[0]?.requestee_division?.leader?.user.username === user.username ? <span onClick={() => setShowTaskActionForm(!showTaskActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
           </div>
         </div>
         <form onSubmit={e => filterTaskResult(e)} className={styles.filterForm} style={{height: showTaskFilterForm ? '414px' : '0'}}>
@@ -195,7 +200,7 @@ const TaskByDivision = () => {
           <button className="primary-btn">Filter</button>
           <button className="secondary-btn" onClick={() => clearTaskFilter()}>Clear</button>
         </form>
-        <Tasks tasks={tasks} inTaskbyDivisionPage={true}/>
+        <Tasks tasks={tasks} division={division} isLeader={tasks[0]?.requestee_division?.leader?.user?.username === user.username} inTaskbyDivisionPage={true} showActionForm={showTaskActionForm} setShowActionForm={setShowTaskActionForm} setRefetching={setRefetchTasksRequest}/>
         {tasks.length > 0 ?
           <ul className="paginations">
             {tasksPrevPage ? <li onClick={() => goToPrevTaskPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
@@ -206,7 +211,7 @@ const TaskByDivision = () => {
           <h2>Requests</h2>
           <div>
             <span onClick={() => setShowRequestFilterForm(!showRequestFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
-            {requests.length > 0 && requests[0]?.requestor_division?.leader?.user.username === user.username ? <span onClick={() => setShowActionForm(!showActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
+            {requests.length > 0 && requests[0]?.requestor_division?.leader?.user.username === user.username ? <span onClick={() => setShowRequestActionForm(!showRequestActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
           </div>
         </div>
         <form onSubmit={e => filterRequestResult(e)} className={styles.filterForm} style={{height: showRequestFilterForm ? '414px' : '0'}}>
@@ -233,7 +238,7 @@ const TaskByDivision = () => {
           <button className="primary-btn">Filter</button>
           <button className="secondary-btn" onClick={() => clearRequestFilter()}>Clear</button>
         </form>
-        <Requests setShowActionForm={setShowActionForm} showActionForm={showActionForm} setRefetching={setRefetchRequest} division={division} requests={requests} isLeader={requests[0]?.requestor_division?.leader?.user.username === user.username} inRequestbyDivisionPage={true}/>
+        <Requests setShowActionForm={setShowRequestActionForm} showActionForm={showRequestActionForm} setRefetching={setRefetchRequestsRequest} division={division} requests={requests} isLeader={requests[0]?.requestor_division?.leader?.user.username === user.username} inRequestbyDivisionPage={true}/>
         {requests.length > 0 ?
           <ul className="paginations">
             {requestsPrevPage ? <li onClick={() => goToPrevRequestPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
