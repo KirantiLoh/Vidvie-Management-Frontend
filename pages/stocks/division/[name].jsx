@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faFilter, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import axios from 'axios'
 import Items from '@components/Items/Items'
@@ -21,12 +21,12 @@ const StockPage = () => {
     const [nextPage, setNextPage] = useState('')
     const [previousPage, setPreviousPage] = useState('')
     const [pageNumber, setPageNumber] = useState(1)
-    const [showActionForm, setShowActionForm] = useState(false)
     const [refetching, setRefetching] = useState(false)
     const [message, setMessage] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [modalType, setModalType] = useState('')
     const [showAddItemForm, setShowAddItemForm] = useState(false)
+    const [showFilterForm, setShowFilterForm] = useState(false)
 
     const [itemName, setItemName] = useState('')
     const [itemFunction, setItemFunction] = useState('')
@@ -34,7 +34,6 @@ const StockPage = () => {
     const [condition, setCondition] = useState('')
 
     const goToNextPage = () => {
-      
       if (nextPage) {
           setCurrentPage(nextPage)
           setPageNumber(pageNumber + 1)  
@@ -42,7 +41,6 @@ const StockPage = () => {
     }
 
     const goToPrevPage = () => {
-      
         if (previousPage) {
             setCurrentPage(previousPage)
             setPageNumber(pageNumber - 1)  
@@ -90,6 +88,12 @@ const StockPage = () => {
       setCondition('')
       setShowAddItemForm(false)
     }
+
+    const filterItem = (e) => {
+      e.preventDefault()
+      setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}?condition=${e.target.value}`)
+      setShowFilterForm(false)
+    }
   
     useEffect(() => {
       getItemsByDivision()
@@ -98,6 +102,16 @@ const StockPage = () => {
   return (
       <div>
         <h1 className="title"><Link href="/stocks"><a><FontAwesomeIcon icon={faArrowLeft}/></a></Link> {data[0]?.division?.name ? data[0]?.division?.name : `${(name.charAt(0).toUpperCase() + name.slice(1)).replace('-', ' ')}`}</h1>
+        <form style={{height: showFilterForm ? '79px' : '0'}} onSubmit={e => e.preventDefault()}>
+          <label htmlFor="">Filter By : </label>
+          <select onChange={(e) => filterItem(e)}>
+            <option value="">None</option>
+            <option value="Good">Good</option>
+            <option value="Second">Second</option>
+            <option value="Bad">Bad</option>
+          </select>
+        </form>
+        
         {user.leader_of.toLowerCase().replace(' ', '-') === name ? 
           <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '430px' : '0'}}>
             <h3 className='secondary-title'>Add New Item</h3>
@@ -121,16 +135,17 @@ const StockPage = () => {
           <div className="upper">
             <h3>Items</h3>
             <div>
-              {user.username === data[0].division?.leader?.user.username ? <span onClick={() => setShowActionForm(!showActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
               {user.username === data[0].division?.leader?.user.username ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
+              <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
             </div>
           </div>
-          <Items division={name} setRefetching={setRefetching} items={data} isLeader={user.username === data[0].division?.leader?.user.username} showActionForm={showActionForm}/>
+          <Items division={name} setRefetching={setRefetching} items={data} isLeader={user.username === data[0].division?.leader?.user.username}/>
         </> : 
         <div className="upper">
           <h3>This division has no items...</h3>
           <div>
             {user.leader_of.toLowerCase().replace(' ', '-') === name ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
+            <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
           </div>
         </div>
         }

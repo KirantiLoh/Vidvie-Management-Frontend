@@ -145,6 +145,10 @@ input, select, textarea {
   font-size: 1.1rem;
 }
 
+option {
+  background-color: var(--primary-background-color);
+}
+
 input[type="datetime-local"] {
   resize: none;
 }

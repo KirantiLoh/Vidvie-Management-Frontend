@@ -173,7 +173,6 @@ const TaskByDivision = () => {
           <h2>Tasks</h2>
           <div>
             <span onClick={() => setShowTaskFilterForm(!showTaskFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
-            {tasks.length > 0 && tasks[0]?.requestee_division?.leader?.user.username === user.username ? <span onClick={() => setShowTaskActionForm(!showTaskActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
           </div>
         </div>
         <form onSubmit={e => filterTaskResult(e)} className={styles.filterForm} style={{height: showTaskFilterForm ? '414px' : '0'}}>
@@ -211,7 +210,6 @@ const TaskByDivision = () => {
           <h2>Requests</h2>
           <div>
             <span onClick={() => setShowRequestFilterForm(!showRequestFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
-            {requests.length > 0 && requests[0]?.requestor_division?.leader?.user.username === user.username ? <span onClick={() => setShowRequestActionForm(!showRequestActionForm)}><FontAwesomeIcon icon={faPenToSquare}/></span> : null}
           </div>
         </div>
         <form onSubmit={e => filterRequestResult(e)} className={styles.filterForm} style={{height: showRequestFilterForm ? '414px' : '0'}}>

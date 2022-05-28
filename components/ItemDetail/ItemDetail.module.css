@@ -1,14 +1,14 @@
-.addRequestForm {
-    padding: 0 15px;
+.addItemForm {
+    padding: 0 10px;
     z-index: 2;
     width: 100%;
 }
 
-.addRequestForm p {
+.addItemForm p {
     margin: 10px 0;
 }
 
-.taskDetail p {
+.itemDetail p {
     max-width: 85ch;
     margin: 10px 0;
 }

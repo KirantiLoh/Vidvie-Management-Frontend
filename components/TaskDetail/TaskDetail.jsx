@@ -111,10 +111,9 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
         <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addRequestForm}>
             <Title text={`Edit Request : ${title}`}/>
+            <p>Requested on : {(new Date(dateAdded)).toLocaleString()}</p>
             <label htmlFor={styles['title']}>Title</label>
             <input id={styles['title']} value={title} onChange={e => setTitle(e.target.value)} required type="text" placeholder='Title' />
-            <label htmlFor={styles['desc']}>Description</label>
-            <textarea id={styles['desc']} value={description} onChange={e => setDescription(e.target.value)} required placeholder='Description' cols="30" rows="10"></textarea>
             <label htmlFor={styles['status']}>Status</label>
             <select value={status} onChange={e => setStatus(e.target.value)} required id={styles['status']}>
                 <option value="Not Started">Not Started</option>
@@ -143,7 +142,8 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
                     return  <option key={divisionChoice.id} value={divisionChoice.name}>{divisionChoice.name}</option>
                 }) : null}
             </select>
-            <p>Requested on : {(new Date(dateAdded)).toLocaleString()}</p>
+            <label htmlFor={styles['desc']}>Description</label>
+            <textarea id={styles['desc']} value={description} onChange={e => setDescription(e.target.value)} required placeholder='Description' cols="30" rows="10"></textarea>
             <button type="submit" className='primary-btn'>Update</button>
             <button type='button' onClick={() => deleteTask()} className="secondary-btn">Delete</button>
         </form>
@@ -152,13 +152,13 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
     } otherChoice={
         <div className={styles.taskDetail}>
             <Title text={title}/>
-            <p>Description : {description}</p>
             <p>Status : {status}</p>
             <p>Priority : {priority}</p>
             <p>Requested by :  {requestor?.name ? requestor.name : requestor}</p>
             <p>Requested to : {requestee?.name ? requestee.name : requestee}</p>
             <p>Requested on : {(new Date(dateAdded)).toLocaleString()}</p>
             <p>Deadline : {(new Date(deadline)).toLocaleString()}</p>
+            <p>Description : {description}</p>
         </div>
     }/>
   )

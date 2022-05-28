@@ -9,7 +9,7 @@ const StockByDivisions = ({divisions}) => {
             return (
                 <li key={division.id}>
                     <h2>
-                        <Link href={`/stocks/${division.slug}`}>
+                        <Link href={`/stocks/division/${division.slug}`}>
                             {division.name}
                         </Link>
                     </h2>

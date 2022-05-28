@@ -1,46 +1,20 @@
-import RenderIf from '@components/RenderIf'
 import React, { useState } from 'react'
 import styles from './Tasks.module.css'
 import Link from 'next/link'
 import axios from 'axios'
 
-const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, showActionForm, setShowActionForm, setRefetching}) => {
+const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, setRefetching}) => {
 
-  const [action, setAction] = useState('')
-  const [updating, setUpdating] = useState('')
-  const [updatedValue, setUpdatedValue] = useState('')
-  const [isChecked, setIsChecked] = useState([])
-
-  const bulkRequest = async (e) => { 
+  const changeTaskStatus = async (e, task) => {
     e.preventDefault()
-    console.log(action, updating, updatedValue, isChecked)
-    if (!action || isChecked.length === 0) return
+    console.log(e.target.value)
     try {
-      if (action === 'Update') {
-        await axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/division/${division}`, {
-          'updating': updating, 'updatedValue': updatedValue, 'isChecked':isChecked
-        })
-      }
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${task.id}`, 
+      {"title": task.title, "description": task.description, "priority": task.priority, "status": e.target.value, "deadline": task.deadline, "requestor_division": (typeof task.requestor_division === 'object' ? task.requestor_division.name : task.requestor), "requestee_division": (typeof task.requestee_division === 'object' ? task.requestee_division.name : task.requestee)})
     } catch (err) {
       console.error(err)
     }
-    setAction('')
-    setIsChecked([])
-    setUpdating('')
-    setUpdatedValue('')
     setRefetching(true)
-    setShowActionForm(false)
-  }
-
-  const handleActionChange = (e) => {
-    setAction(e.target.value)
-    setUpdating('')
-    setUpdatedValue('')
-  }
-
-  const handleUpdatingChange = (e) => {
-    setUpdating(e.target.value)
-    setUpdatedValue('')
   }
 
   const setPriorityColor = (priority) => {
@@ -58,34 +32,6 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, showActionForm,
 
   return (
     <>
-      <RenderIf isTrue={isLeader && inTaskbyDivisionPage} children={
-        <form style={{maxHeight: showActionForm ? '247px' : '0'}} onSubmit={bulkRequest} className={styles.leaderForm}>
-          <h3>Bulk Action : </h3>
-          <select required id={styles['action']} value={action} onChange={e => handleActionChange(e)}>
-            <option value="" disabled hidden>Action</option>
-            <option value="Update">Bulk Update</option>
-          </select>
-          {action === "Update" ? (
-          <>
-            <label htmlFor=""></label>
-            <select required id={styles['action']} value={updating} onChange={e => handleUpdatingChange(e)}>
-              <option value="" disabled hidden>Field</option>
-              <option value="Status">Status</option>
-            </select>
-          </>
-          ) : null}
-          {updating === "Status" ? (
-          <select required id={styles['action']} value={updatedValue} onChange={e => setUpdatedValue(e.target.value)}>
-            <option value="" disabled hidden>Choose Here</option>
-            <option value="Not Started">Not Started</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Shipping">Shipping</option>
-            <option value="Finished">Finished</option>
-          </select>
-          ) : null}
-          <button type="submit" className='primary-btn'>Submit</button>
-        </form>
-      }/>
       <ul className={styles.tasks}>
         {tasks.length > 0 ? tasks.map((task) => {
           return (
@@ -101,7 +47,14 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, showActionForm,
                 </h3>
                 <div className={styles.priorityAndStatus}>
                   <p className={styles.priority} style={{backgroundColor: setPriorityColor(task.priority)}}>{task.priority}</p>
-                  <p className={styles.status} style={{backgroundColor: setStatusColor(task.status)}}>{task.status}</p>
+                  {isLeader ? 
+                    <select className={styles.status} style={{backgroundColor: setStatusColor(task.status), border: 'none'}} value={task.status} onChange={e => changeTaskStatus(e, task)}>
+                      <option value="Not Started">Not Started</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Shipping">Shipping</option>
+                      <option value="Finished">Finished</option>
+                    </select> :
+                    <p className={styles.status} style={{backgroundColor: setStatusColor(task.status)}}>{task.status}</p>}
                 </div>
               </div>
               <div className={styles.details}>
@@ -111,7 +64,6 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, showActionForm,
                 <p>Deadline : {(new Date(task.deadline)).toLocaleString()}</p>
               </div>
               </div>
-              {isLeader && inTaskbyDivisionPage && showActionForm ? <input type="checkbox" value={task.id} onChange={() => isChecked.includes(task.id) ? setIsChecked(isChecked.filter(e => e !== task.id)) : setIsChecked([...isChecked, task.id])} checked={isChecked.includes(task.id)}/> : null}
             </li>
           )
         }) : 
