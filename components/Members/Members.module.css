@@ -17,7 +17,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    .divisions li {
+    .members li {
       box-shadow: none;
     }
   }

@@ -112,7 +112,7 @@ const StockPage = () => {
           </select>
         </form>
         
-        {user.leader_of.toLowerCase().replace(' ', '-') === name ? 
+        {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
           <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '430px' : '0'}}>
             <h3 className='secondary-title'>Add New Item</h3>
             <label htmlFor="">Name</label>
@@ -144,7 +144,7 @@ const StockPage = () => {
         <div className="upper">
           <h3>This division has no items...</h3>
           <div>
-            {user.leader_of.toLowerCase().replace(' ', '-') === name ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
+            {user.leader_of && user.leader_of.toLowerCase().replace(' ', '-') === name ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
             <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
           </div>
         </div>
