@@ -17,25 +17,16 @@
     background-color: var(--secondary-background-color);
 }
 
-.items input {
-    width: 39px;
-    height: 39px;
-    text-align: center;
-    border-radius: 50%;
-    margin-left: 10px;
-}
-
 .item {
     flex: 1 1 auto;
 }
 
 .itemTitle {
-    max-width: 20ch;
+    max-width: 40ch;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 5px 0;
-    font-size: 1.7rem;
 }
 
 .upperDetail {
@@ -52,8 +43,8 @@
     width: max-content;
 }
 
-.leaderForm {
-    margin: 10px;
-    overflow: hidden;
-    transition: .5s;
+@media screen and (max-width: 560px) {
+    .itemTitle {
+        max-width: 20ch;
+    }
 }

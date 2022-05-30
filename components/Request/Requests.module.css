@@ -2,13 +2,6 @@
     list-style: none;
 }
 
-.requests input {
-    width: 39px;
-    height: 39px;
-    text-align: center;
-    border-radius: 50%;
-}
-
 .requestContainer,
 .requests li {
     margin: 10px 0;
@@ -29,12 +22,11 @@
 }
 
 .requestTitle {
-    max-width: 20ch;
+    max-width: 40ch;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 5px 0;
-    font-size: 1.7rem;
 }
 
 .upperDetail {
@@ -59,12 +51,6 @@
     width: max-content;
 }
 
-.leaderForm {
-    margin: 10px;
-    overflow: hidden;
-    transition: .5s;
-}
-
 @media screen and (max-width: 560px) {
     .priority,
     .status {
@@ -74,5 +60,6 @@
 
     .requestTitle {
         width: 100%;
+        max-width: 20ch;
     }
 }

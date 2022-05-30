@@ -7,7 +7,6 @@ const Requests = ({showActionForm, setShowActionForm, requests, isLeader, setRef
 
   const changeRequestStatus = async (e, request) => {
     e.preventDefault()
-    console.log(e.target.value)
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${request.id}`, 
       {"title": request.title, "description": request.description, "priority": request.priority, "status": e.target.value, "deadline": request.deadline, "requestor_division": (typeof request.requestor_division === 'object' ? request.requestor_division.name : request.requestor), "requestee_division": (typeof request.requestee_division === 'object' ? request.requestee_division.name : request.requestee)})

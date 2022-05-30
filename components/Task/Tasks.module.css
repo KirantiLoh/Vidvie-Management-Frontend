@@ -15,24 +15,20 @@
     background-color: var(--secondary-background-color);
 }
 
+.tasks li p {
+    font-size: 0.9rem;
+}
+
 .taskContainer {
     flex: 1 1 auto;
 }
 
-.tasks input {
-    width: 39px;
-    height: 39px;
-    text-align: center;
-    border-radius: 50%;
-}
-
 .taskTitle {
-    max-width: 20ch;
+    max-width: 40ch;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 5px 0;
-    font-size: 1.7rem;
 }
 
 .upperDetail {
@@ -47,7 +43,6 @@
     align-items: center;
     width: max-content;
     margin: 5px 0;
-    font-size: 1.1rem;
 }
 
 .priority,
@@ -56,4 +51,10 @@
     margin-right: 10px;
     border-radius: 30px;
     width: max-content;
+}
+
+@media screen and (max-width: 560px) {
+    .taskTitle {
+        max-width: 20ch;
+    }
 }

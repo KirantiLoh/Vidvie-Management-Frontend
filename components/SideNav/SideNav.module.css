@@ -1,6 +1,6 @@
 .sideNav {
     height: 100vh;
-    width: 200px;
+    width: 180px;
     overflow-y: auto;
     background-color: var(--tertiary-background-color);
     color: var(--primary-text-color);
@@ -23,7 +23,6 @@
 
 .navlinks {
     list-style: none;
-    font-size: 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

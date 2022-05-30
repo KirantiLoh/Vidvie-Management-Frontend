@@ -7,7 +7,6 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, setRefetching})
 
   const changeTaskStatus = async (e, task) => {
     e.preventDefault()
-    console.log(e.target.value)
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${task.id}`, 
       {"title": task.title, "description": task.description, "priority": task.priority, "status": e.target.value, "deadline": task.deadline, "requestor_division": (typeof task.requestor_division === 'object' ? task.requestor_division.name : task.requestor), "requestee_division": (typeof task.requestee_division === 'object' ? task.requestee_division.name : task.requestee)})
