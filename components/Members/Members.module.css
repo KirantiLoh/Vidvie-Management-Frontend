@@ -9,4 +9,15 @@
     background-color: var(--tertiary-background-color);
     border-radius: 3px;
     transition: .3s;
+    box-shadow: 0px 0px 6px 0px;
 }
+
+.members li:hover {
+    background-color: var(--secondary-background-color);
+}
+
+@media (prefers-color-scheme: light) {
+    .divisions li {
+      box-shadow: none;
+    }
+  }

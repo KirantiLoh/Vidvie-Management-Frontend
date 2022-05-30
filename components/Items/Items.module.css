@@ -49,3 +49,9 @@
         max-width: 20ch;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .sideNav {
+      box-shadow: none;
+    }
+  }

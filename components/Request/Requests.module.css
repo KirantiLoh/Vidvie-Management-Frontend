@@ -11,6 +11,7 @@
     transition: .3s;
     display: flex;
     align-items: center;
+    box-shadow: 0px 0px 6px 0px;
 }
 
 .request {
@@ -63,3 +64,9 @@
         max-width: 20ch;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .requests li {
+      box-shadow: none;
+    }
+  }
