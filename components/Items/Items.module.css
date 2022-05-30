@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 0px 6px 0px;
 }
 
 .items li:hover {

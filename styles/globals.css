@@ -7,19 +7,22 @@
 }
 
 :root {
-  --primary-background-color: #121212;
-  --secondary-background-color: #242424;
-  --tertiary-background-color: #333333;
-  --primary-text-color: #fff;
-  --secondary-text-color:rgba(255, 255, 255, 0.74);
+  --primary-background-color: #fff;
+  --secondary-background-color: #fff;
+  --tertiary-background-color: #f1f1f1;
+  --primary-text-color: rgb(0, 0, 0);
+  --secondary-text-color:rgba(44, 44, 44, 0.74);
   --primary-color: #F36D25;
-  --sidenav-bg-color: var(--primary-background-color);
   --modal-error-background-color: #fff1f1;
   --modal-error-border-color: #f6d1d3;  
   --modal-error-text-color: #9f0000;
   --modal-success-background-color: #d4edda;
   --modal-success-text-color: #155724;
   --modal-success-border-color: #b5e6c4;
+  --status-not-started-background-color: #910810;
+  --status-in-progress-background-color: #df9a00;
+  --status-shipping-background-color: #df3600;
+  --status-finished-background-color: #497e14;
 }
 
 
@@ -186,7 +189,7 @@ input[type="checkbox"]:checked::before {
 
 input[type="datetime-local"],
 input[type="date"] {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 select {
@@ -234,22 +237,24 @@ form {
     transition: .5s;
 }
 
-/*
 @media (prefers-color-scheme: dark) {
+  * {
+    box-shadow: none;
+  }
   :root {
     --primary-background-color: #121212;
     --secondary-background-color: #242424;
     --tertiary-background-color: #333333;
     --primary-text-color: #fff;
     --secondary-text-color:rgba(255, 255, 255, 0.74);
-    --sidenav-bg-color: var(--primary-background-color)
+
   }
   input[type="datetime-local"],
   input[type="date"] {
     color-scheme: dark;
   }
 }
-*/
+
 
 @media screen and (max-width: 560px) {
   .showMenuBtn {

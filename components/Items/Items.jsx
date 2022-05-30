@@ -13,11 +13,11 @@ const Items = ({items, division, isLeader, setRefetching}) => {
     }
 
     const setConditionColor = (condition) => {
-      if (condition === 'Bad') return '#910810'
-      if (condition === 'Second') return '#df9a00'
-      if (condition === 'Good') return '#4d9b00' 
+      if (condition === 'Bad') return 'var(--status-not-started-background-color)'
+      if (condition === 'Second') return 'var(--status-in-progress-background-color)'
+      if (condition === 'Good') return 'var(--status-finished-background-color)' 
     }
-    
+
   return (
     <>
     <ul className={styles.items}>

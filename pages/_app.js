@@ -16,13 +16,11 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Project Management Website for Vidvie" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PWACheckerProvider>
         <AuthProvider>
           <AxiosProvider>
             <Component {...pageProps} />
           </AxiosProvider>
         </AuthProvider>
-      </PWACheckerProvider>
     </>
   )
 }

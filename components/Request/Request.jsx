@@ -29,16 +29,16 @@ const Requests = ({showActionForm, setShowActionForm, requests, isLeader, setRef
   }
 
   const setPriorityColor = (priority) => {
-    if (priority === 'High') return '#910810'
-    if (priority === 'Medium') return '#df3600' 
-    else return '#497e14'
+    if (priority === 'High') return 'var(--status-not-started-background-color)'
+    if (priority === 'Medium') return 'var(--status-shipping-background-color)' 
+    else return 'var(--status-finished-background-color)'
   }
 
   const setStatusColor = (status) => {
     if (status === 'Not Started') return '#910810'
-    if (status === 'In Progress') return '#7a7702'
-    if (status === 'Shipping') return '#df3600' 
-    if (status === 'Finished') return '#497e14'
+    if (status === 'In Progress') return 'var(--status-in-progress-background-color)'
+    if (status === 'Shipping') return 'var(--status-shipping-background-color)' 
+    if (status === 'Finished') return 'var(--status-finished-background-color)'
   }
 
   return (
