@@ -8,15 +8,15 @@ const ItemPage = () => {
     const router = useRouter()
 
     const [itemURL, setItemURL] = useState('')
-    const [itemDetail, setItemDetail] = useState({})
+    const [items, setItems] = useState([])
     const [refetchRequest, setRefetchRequest] = useState(false)
 
-    const getItemDetail = async () => {
+    const getItems = async () => {
         try {
            let response = await axios.get(itemURL)
             let data = await response.data
             if (response.status === 200) {
-                setItemDetail(data)
+                setItems(data)
                 setRefetchRequest(false)
             } 
         } catch (e) {
@@ -35,13 +35,13 @@ const ItemPage = () => {
 
     useEffect(() => {
         if (itemURL) {
-            getItemDetail()
+            getItems()
         }
     }, [itemURL, refetchRequest])
 
     return (
         <div>
-            <ItemDetail itemDetail={itemDetail} refetchRequest={refetchRequest} setRefetchRequest={setRefetchRequest}/>
+            <ItemDetail items={items} refetchRequest={refetchRequest} setRefetchRequest={setRefetchRequest}/>
         </div>
     )
 

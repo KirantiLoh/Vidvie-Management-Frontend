@@ -5,34 +5,6 @@ import Link from 'next/link'
 
 const Items = ({items, division, isLeader, setRefetching}) => {
 
-    const [action, setAction] = useState('')
-    const [updating, setUpdating] = useState('')
-    const [updatedValue, setUpdatedValue] = useState('')
-    const [isChecked, setIsChecked] = useState([])
-
-    const bulkRequest = async (e) => { 
-      e.preventDefault()
-      if (!action || isChecked.length === 0) return
-      try {
-        if (action === 'Delete') {
-          await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${division}`, {
-            data: {'isChecked':isChecked}
-          })
-        } else if (action === 'Update') {
-          await axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${division}`, {
-            'updating': updating, 'updatedValue': updatedValue, 'isChecked':isChecked
-          })
-        }
-      } catch (err) {
-        console.error(err)
-      }
-      setAction('')
-      setIsChecked([])
-      setUpdating('')
-      setUpdatedValue('')
-      setRefetching(true)
-    }
-
     const changeItemCondition = async (e, item) => {
       e.preventDefault()
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/${item.id}`,
@@ -45,8 +17,7 @@ const Items = ({items, division, isLeader, setRefetching}) => {
       if (condition === 'Second') return '#df9a00'
       if (condition === 'Good') return '#4d9b00' 
     }
-
-
+    
   return (
     <>
     <ul className={styles.items}>
@@ -73,6 +44,7 @@ const Items = ({items, division, isLeader, setRefetching}) => {
                     </div>
                     <div>
                         <p>Stock : {item.stock}</p>
+                        <p>Date Updated : {(new Date(item.date_updated)).toLocaleString()}</p>
                     </div>
                 </div>
             </li>

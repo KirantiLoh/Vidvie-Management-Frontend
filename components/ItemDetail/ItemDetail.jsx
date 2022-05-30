@@ -6,8 +6,9 @@ import styles from './ItemDetail.module.css'
 import Modal from '@components/Modal/Modal'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import Items from '@components/Items/Items'
 
-const ItemDetail = ({itemDetail, setRefetchRequest}) => {
+const ItemDetail = ({items, setRefetchRequest}) => {
 
     const { user } = useContext(AuthContext)
 
@@ -60,16 +61,21 @@ const ItemDetail = ({itemDetail, setRefetchRequest}) => {
     }
 
       useEffect(() => {
-        setId(itemDetail.id)
-        setName(itemDetail.name)
-        setStock(itemDetail.stock)
-        setItemFunction(itemDetail.function)
-        setCondition(itemDetail.condition)
-        setDateAdded((itemDetail.date_added)?.split("+")[0])
-        setRequestor(itemDetail.division)
-      }, [itemDetail])
+        if (items.length > 0) {
+            let itemDetail = items[0]
+            setId(itemDetail.id)
+            setName(itemDetail.name)
+            setStock(itemDetail.stock)
+            setItemFunction(itemDetail.function)
+            setCondition(itemDetail.condition)
+            setDateAdded((itemDetail.date_added)?.split("+")[0])
+            setRequestor(itemDetail.division)
+        }
+      }, [items])
+
 
   return (
+      <>
     <RenderIf isTrue={user.username === requestor?.leader?.user.username} children={
         <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addItemForm}>
@@ -103,6 +109,9 @@ const ItemDetail = ({itemDetail, setRefetchRequest}) => {
             <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
         </div>
     }/>
+    <h2 className='secondary-title'>History</h2>
+    {items.length > 1 ? <Items items={items.slice(1)}/> : null}
+      </>
   )
 }
 
