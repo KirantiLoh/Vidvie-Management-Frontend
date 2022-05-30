@@ -16,7 +16,7 @@
     background-color: var(--secondary-background-color);
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     .divisions li {
       box-shadow: none;
     }

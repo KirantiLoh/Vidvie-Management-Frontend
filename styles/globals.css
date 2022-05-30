@@ -237,7 +237,7 @@ form {
     transition: .5s;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   * {
     box-shadow: none;
   }
