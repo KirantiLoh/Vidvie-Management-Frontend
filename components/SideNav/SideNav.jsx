@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import styles from './SideNav.module.css'
 import Logo from '@public/logo.png'
 import Image from 'next/image'
@@ -14,6 +14,23 @@ const SideNav = () => {
   const { isAuthenticated } = useContext(AuthContext)
 
   const chkRef = useRef()
+
+  useEffect(() => {
+    let startPos, endPos
+    window.addEventListener('touchstart', (e) => {
+      startPos = e.changedTouches[0].clientX
+    })
+    window.addEventListener('touchend', (e) => {
+      endPos = e.changedTouches[0].clientX
+      if (startPos < endPos) {
+        chkRef.current.checked = true
+      } else {
+        chkRef.current.checked = false
+      }
+    })
+  }, [])
+  
+  
 
   return (
     <>
