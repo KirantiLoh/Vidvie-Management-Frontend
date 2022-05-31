@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" content="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo-VIDVIE-icon.png"/>
         <meta name="theme-color" content='#F36D25'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, user-scaleable=no' />
       </Head>
         <AuthProvider>
           <AxiosProvider>
