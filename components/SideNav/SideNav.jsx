@@ -22,9 +22,10 @@ const SideNav = () => {
     })
     window.addEventListener('touchend', (e) => {
       endPos = e.changedTouches[0].clientX
-      if (startPos < endPos) {
+      console.log(endPos - startPos)
+      if (endPos - startPos > 150) {
         chkRef.current.checked = true
-      } else {
+      } else if (endPos - startPos < -150) {
         chkRef.current.checked = false
       }
     })
@@ -37,12 +38,12 @@ const SideNav = () => {
     <input type="checkbox" id="chk" ref={chkRef}/>
     <nav className={styles.sideNav}>
       <Link href='/'>
-        <a onClick={() => chkRef.current.click()}>
+        <a onClick={() => chkRef.current.checked = false}>
           <Image src={Logo} alt="Logo Vidvie" objectFit='cover' />
         </a>
       </Link>
       <RenderIf isTrue={isAuthenticated} children={
-      <div className={styles.navlinksContainer} onClick={() => chkRef.current.click()}>
+      <div className={styles.navlinksContainer} onClick={() => chkRef.current.checked = false}>
         <ul className={styles.navlinks}>
           <li>
             <h2>Tasks</h2>
