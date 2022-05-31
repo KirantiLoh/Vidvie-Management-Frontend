@@ -141,8 +141,8 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             <p>Priority : {priority}</p>
             <p>Requested by :  {requestor?.name ? requestor.name : requestor}</p>
             <p>Requested to : {requestee?.name ? requestee.name : requestee}</p>
-            <p>Requested on : {(new Date(dateAdded)).toLocaleString()}</p>
-            <p>Deadline : {(new Date(deadline)).toLocaleString()}</p>
+            <p>Requested on : {dateAdded ? (new Date(dateAdded)).toLocaleString() : null}</p>
+            <p>Deadline : {deadline ? (new Date(deadline)).toLocaleString() : null}</p>
             <p>Description : {description}</p>
         </div>
     }/>

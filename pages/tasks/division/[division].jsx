@@ -236,7 +236,7 @@ const TaskByDivision = () => {
           <button className="primary-btn">Filter</button>
           <button className="secondary-btn" onClick={() => clearRequestFilter()}>Clear</button>
         </form>
-        <Requests setShowActionForm={setShowRequestActionForm} showActionForm={showRequestActionForm} setRefetching={setRefetchRequestsRequest} division={division} requests={requests} isLeader={requests[0]?.requestee_division?.name === user.division} inRequestbyDivisionPage={true}/>
+        <Requests setShowActionForm={setShowRequestActionForm} showActionForm={showRequestActionForm} setRefetching={setRefetchRequestsRequest} division={division} requests={requests} isLeader={requests[0]?.requestor_division?.name === user.division} inRequestbyDivisionPage={true}/>
         {requests.length > 0 ?
           <ul className="paginations">
             {requestsPrevPage ? <li onClick={() => goToPrevRequestPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
