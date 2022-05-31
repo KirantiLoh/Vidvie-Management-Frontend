@@ -97,7 +97,7 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={contextData}>
             {loading ? <LoadingScreen/> : 
-            <main className="main-content">
+            <main className="main-content" style={{WebkitTapHighlightColor: "transparent"}}>
                 {isAuthenticated ? <><SideNav/><AddRequestBtn/></> : null}
                 <div className="children" style={{padding: isAuthenticated ? '10px' : '0'}}>
                     {children}
