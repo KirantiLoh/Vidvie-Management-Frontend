@@ -57,14 +57,8 @@ const AddRequestForm = () => {
 
 
   const getDivisions = async () => {
-    let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${authToken.access}`
-      }
-    })
-    let data = await response.json()
+    let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`)
+    let data = await response.data
     if (response.status === 200) {
       setDivisionsChoices(data)
     }

@@ -15,10 +15,10 @@ function MyApp({ Component, pageProps }) {
         <title>Vidvie Management</title>
         <meta name="description" content="Project Management Website for Vidvie" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="manifest" content="/manifest.json" />
+        <link rel="manifest" href="/manifest.json"/>
         <link rel="apple-touch-icon" href="/logo-VIDVIE-icon.png"/>
         <meta name="theme-color" content='#F36D25'/>
-        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, user-scaleable=no' />
+        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no' />
       </Head>
         <AuthProvider>
           <AxiosProvider>

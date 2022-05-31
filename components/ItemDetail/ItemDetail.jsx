@@ -109,8 +109,11 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
         </div>
     }/>
-    <h2 className='secondary-title'>History</h2>
-    {items.length > 1 ? <Items items={items.slice(1)}/> : null}
+    {items.length > 1 ? 
+    <>
+        <h2 className='secondary-title'>History</h2>
+        <Items items={items.slice(1)}/>
+    </> : null}
       </>
   )
 }

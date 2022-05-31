@@ -145,7 +145,6 @@ input, select, textarea {
   padding: 5px;
   width: 100%;
   resize: vertical;
-  font-size: 1.1rem;
 }
 
 option {

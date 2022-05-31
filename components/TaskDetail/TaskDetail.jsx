@@ -5,6 +5,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import styles from './TaskDetail.module.css'
 import Modal from '@components/Modal/Modal'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const TaskDetail = ({taskDetail, setRefetchRequest}) => {
 
@@ -22,20 +23,15 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
     const [requestor, setRequestor] = useState('')
     const [requestee, setRequestee] = useState('')
     const [currentRequestor, setCurrentRequestor] = useState('')
+    const [currentRequestee, setCurrentRequestee] = useState('')
     const [divisionsChoices, setDivisionsChoices] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [modalType, setModalType] = useState('')
     const [message, setMessage] = useState('')
 
     const getDivisions = async () => {
-        let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`, {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${authToken.access}`
-          }
-        })
-        let data = await response.json()
+        let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`)
+        let data = await response.data
         if (response.status === 200) {
           setDivisionsChoices(data)
         }
@@ -46,15 +42,9 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
         if (!title || !description || !status || !priority || !requestor || !deadline) return
         let deadlineDate = (new Date(deadline)).toISOString()
         try {
-            let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    "Authorization": `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${authToken.access}`
-                },
-                body: JSON.stringify({"title": title, "description": description, "priority": priority, "status": status, "deadline": deadlineDate, "requestor_division": (typeof requestor === 'object' ? requestor.name : requestor), "requestee_division": (typeof requestee === 'object' ? requestee.name : requestee)})
-            })
-            let data = await response.json()
+            let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`,
+            {"title": title, "description": description, "priority": priority, "status": status, "deadline": deadlineDate, "requestor_division": (typeof requestor === 'object' ? requestor.name : requestor), "requestee_division": (typeof requestee === 'object' ? requestee.name : requestee)})
+            let data = await response.data
             if (response.status === 200) {
                 setMessage(data.message)
                 setModalType('success')
@@ -71,14 +61,8 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
 
     const deleteTask = async () => {
         try {
-            let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`, {
-                method: 'DELETE',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    "Authorization": `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${authToken.access}`
-                },
-            })
-            let data = await response.json()
+            let response = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`)
+            let data = await response.data
             if (response.status === 200) {
                 router.back()
             }
@@ -104,10 +88,11 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
         setRequestor(taskDetail.requestor_division)
         setCurrentRequestor(taskDetail.requestor_division)
         setRequestee(taskDetail.requestee_division)
+        setCurrentRequestee(taskDetail.requestee_division)
       }, [taskDetail])
 
   return (
-    <RenderIf isTrue={user.username === currentRequestor?.leader?.user.username} children={
+    <RenderIf isTrue={user.division === currentRequestor?.name || user.division === currentRequestee?.name} children={
         <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addRequestForm}>
             <Title text={`Edit Request : ${title}`}/>

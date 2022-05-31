@@ -1,12 +1,12 @@
 {
-    "theme_color": "#F36D25",
-    "background_color": "#F36D25",
+    "theme_color": "#121212",
+    "background_color": "#121212",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
+    "description": "Project Management Website for VIDVIE",
     "name": "Vidvie Management",
     "short_name": "Vidvie Management",
-    "description": "Project Management Website for Vidvie",
     "icons": [
         {
             "src": "/icon-192x192.png",
