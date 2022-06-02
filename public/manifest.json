@@ -12,25 +12,29 @@
             "name": "View Recent Tasks",
             "short_name": "Recent Tasks",
             "description": "View Recent Tasks",
-            "url": "/"
+            "url": "/",
+            "icons": [{"src": "/list-check-solid.png", "sizes": "192x192"}]
         },
         {
             "name": "Add New Request",
             "short_name": "New Request",
             "description": "Add New Request",
-            "url": "/tasks/add"
+            "url": "/tasks/add",
+            "icons": [{"src": "/plus-solid.png", "sizes": "192x192"}]
         },
         {
             "name": "Check for Stocks",
             "short_name": "Stocks",
             "description": "Check for Stocks",
-            "url": "/stocks"
+            "url": "/stocks",
+            "icons": [{"src": "/box-open-solid.png", "sizes": "192x192"}]
         },
         {
             "name": "View Divisions",
             "short_name": "Divisions",
             "description": "View Divisions",
-            "url": "/divisions"
+            "url": "/divisions",
+            "icons": [{"src": "/users-between-lines-solid.png", "sizes": "192x192"}]
         }
     ],
     "icons": [
