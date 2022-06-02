@@ -9,7 +9,7 @@ import Modal from '@components/Modal/Modal'
 
 const LoginPage = () => {
 
-  const { loginUser } = useContext(AuthContext)
+  const { loginUser, setLoading } = useContext(AuthContext)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -23,6 +23,7 @@ const LoginPage = () => {
   
   const login = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const [error, status] = await loginUser(username, password)
     if (error && status === 401) {
       setMessage(error.message)
@@ -30,6 +31,7 @@ const LoginPage = () => {
       setUsername('')
       setPassword('')
     }
+    setLoading(false)
   }
 
   return (

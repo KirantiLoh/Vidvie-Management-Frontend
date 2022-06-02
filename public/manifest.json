@@ -7,6 +7,32 @@
     "description": "Project Management Website for VIDVIE",
     "name": "Vidvie Management",
     "short_name": "Vidvie Management",
+    "shortcuts": [
+        {
+            "name": "View Recent Tasks",
+            "short_name": "Recent Tasks",
+            "description": "View Recent Tasks",
+            "url": "/"
+        },
+        {
+            "name": "Add New Request",
+            "short_name": "New Request",
+            "description": "Add New Request",
+            "url": "/tasks/add"
+        },
+        {
+            "name": "Check for Stocks",
+            "short_name": "Stocks",
+            "description": "Check for Stocks",
+            "url": "/stocks"
+        },
+        {
+            "name": "View Divisions",
+            "short_name": "Divisions",
+            "description": "View Divisions",
+            "url": "/divisions"
+        }
+    ],
     "icons": [
         {
             "src": "/icon-192x192.png",
