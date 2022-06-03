@@ -69,8 +69,6 @@ export const AuthProvider = ({children}) => {
                 setIsAuthenticated(true)
                 setLoading(false)
                 return data.access
-            } else {
-                
             }
         } catch (err) {
             console.error(err)

@@ -11,7 +11,7 @@ import { AuthContext } from '@context/AuthContext'
 
 const SideNav = () => {
 
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, user } = useContext(AuthContext)
 
   const chkRef = useRef()
 
@@ -22,8 +22,7 @@ const SideNav = () => {
     })
     window.addEventListener('touchend', (e) => {
       endPos = e.changedTouches[0].clientX
-      console.log(endPos - startPos)
-      if (endPos - startPos > 150) {
+      if (endPos - startPos > 150 && !e.path.includes(document.querySelector('.map-container'))) {
         chkRef.current.checked = true
       } else if (endPos - startPos < -150) {
         chkRef.current.checked = false

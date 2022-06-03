@@ -17,8 +17,11 @@ export const AxiosProvider = ({children}) => {
         return response
     }, async error => {
         const originalRequest = error.config
-        if (error.response.status === 401) {
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true
             await refreshingToken()
+            console.log(await axios(originalRequest))
+            return await axios(originalRequest)
         } 
         return error
     })
