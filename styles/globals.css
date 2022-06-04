@@ -115,6 +115,7 @@ body {
   color: var(--primary-text-color);
   transition: .3s;
   cursor: pointer;
+  display: inline-block;
 }
 
 .primary-btn:hover {
@@ -155,12 +156,6 @@ input[type="datetime-local"] {
   resize: none;
 }
 
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    border: 3px var(--primary-text-color) solid;
-    cursor: pointer;
-    transition: .3s;
-}
 
 input[type="checkbox"]::before {
   content: "";
