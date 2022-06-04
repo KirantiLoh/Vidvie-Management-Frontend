@@ -6,6 +6,8 @@ import LoginImg from '@public/login-img.jpg'
 import LogoImg from '@public/logo.png'
 import Image from 'next/image'
 import Modal from '@components/Modal/Modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 const LoginPage = () => {
 
@@ -15,10 +17,22 @@ const LoginPage = () => {
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
   const [showModal, setShowModal] = useState(false)
+  const [fieldType, setFieldType] = useState('password')
+  const [iconType, setIconType] = useState(faEye)
 
   const resetForm = () => {
     setUsername('')
     setPassword('')
+  }
+
+  const handleClick = () => {
+    if (fieldType === 'password') {
+      setFieldType('text')
+      setIconType(faEyeSlash)
+    } else {
+      setFieldType('password')
+      setIconType(faEye)
+    }
   }
   
   const login = async (e) => {
@@ -42,7 +56,10 @@ const LoginPage = () => {
         <form className={styles.loginForm} onSubmit={e => login(e)}>
           <h1>Login</h1>
           <input type="text" className={styles.usernameField} placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-          <input type="password" className={styles.passwordField} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <div className={styles.passwordFieldContainer}>
+            <input type={fieldType} className={styles.passwordField} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <span className={styles.showPassword} onClick={() => handleClick()}><FontAwesomeIcon icon={iconType}/></span>
+          </div>
           <button type="submit" className='primary-btn'>Login</button>
           <button type="reset" className='secondary-btn' onClick={() => resetForm()}>Reset</button>
         </form>

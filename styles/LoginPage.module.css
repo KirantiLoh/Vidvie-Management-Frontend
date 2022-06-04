@@ -39,3 +39,20 @@
     text-align: center;
     margin: 10 auto;
 }
+
+.passwordFieldContainer { 
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.showPassword {
+    position: absolute;
+    cursor: pointer;
+    transition: .3s;
+    right: 0;
+}
+
+.showPassword:hover {
+    color: var(--primary-color);
+}
