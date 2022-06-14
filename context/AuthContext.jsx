@@ -80,6 +80,7 @@ export const AuthProvider = ({children}) => {
     const contextData = {
         user: user,
         authToken: authToken,
+        setAuthToken: setAuthToken,
         isAuthenticated: isAuthenticated,
         loginUser: loginUser,
         logoutUser: logoutUser,

@@ -19,11 +19,13 @@ export const AxiosProvider = ({children}) => {
         const originalRequest = error.config
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true
-            await refreshingToken()
+            let access = await refreshingToken()
+            axios.defaults.headers.common['Authorization'] = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
+            originalRequest.headers.Authorization = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
             console.log(await axios(originalRequest))
             return await axios(originalRequest)
         } 
-        return error
+        return Promise.reject(error)
     })
 
   return (
