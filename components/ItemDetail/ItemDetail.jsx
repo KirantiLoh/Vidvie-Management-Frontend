@@ -35,10 +35,13 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             if (response.status === 200) {
                 setMessage(data.message)
                 setModalType('success')
+            } else {
+                setMessage(data.message)
+                setModalType('error')
             }
         } catch (err) {
             console.error(err)
-            setMessage(err)
+            setMessage(err.response.data.message)
             setModalType('error')
         } finally {
             setShowModal(true)

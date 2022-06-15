@@ -21,6 +21,11 @@
     
 }
 
+.items li p {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
 .item {
     flex: 1 1 auto;
 }

@@ -45,13 +45,14 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`,
             {"title": title, "description": description, "priority": priority, "status": status, "deadline": deadlineDate, "requestor_division": (typeof requestor === 'object' ? requestor.name : requestor), "requestee_division": (typeof requestee === 'object' ? requestee.name : requestee)})
             let data = await response.data
+            console.log(data)
             if (response.status === 200) {
                 setMessage(data.message)
                 setModalType('success')
             }
         } catch (err) {
             console.error(err)
-            setMessage(err)
+            setMessage(err.response.data.message)
             setModalType('error')
         } finally {
             setShowModal(true)

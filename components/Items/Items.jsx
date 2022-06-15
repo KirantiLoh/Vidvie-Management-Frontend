@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import styles from './Items.module.css'
 import axios from 'axios'
 import Link from 'next/link'
 
-const Items = ({items, division, isLeader, setRefetching}) => {
+const Items = ({items, isLeader, setRefetching}) => {
+
+    const descRef = useRef()
 
     const changeItemCondition = async (e, item) => {
       e.preventDefault()
@@ -45,6 +47,7 @@ const Items = ({items, division, isLeader, setRefetching}) => {
                     <div>
                         <p>Stock : {item.stock}</p>
                         <p>Date Updated : {(new Date(item.date_updated)).toLocaleString()}</p>
+                        <p>Desc : {item.function}</p>
                     </div>
                 </div>
             </li>

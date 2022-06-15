@@ -20,6 +20,7 @@
 
 .tasks li p {
     font-size: 0.9rem;
+    color: var(--secondary-text-color);
 }
 
 .taskContainer {
@@ -48,8 +49,8 @@
     margin: 5px 0;
 }
 
-.priority,
-.status {
+.priorityAndStatus .priority,
+.priorityAndStatus .status {
     padding: 5px 15px;
     margin-right: 10px;
     border-radius: 30px;
