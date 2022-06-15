@@ -7,6 +7,7 @@
     left: 0;
     display: grid;
     place-items: center;
+    background-color: var(--primary-background-color);
 }
 
 .loadingScreen div {

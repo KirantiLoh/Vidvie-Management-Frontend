@@ -18,7 +18,6 @@ const Requests = ({showActionForm, setShowActionForm, requests, isLeader, setRef
 
   const changeRequestPriority = async (e, request) => {
     e.preventDefault()
-    console.log(e.target.value)
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${request.id}`, 
       {"title": request.title, "description": request.description, "priority": e.target.value, "status": request.status, "deadline": request.deadline, "requestor_division": (typeof request.requestor_division === 'object' ? request.requestor_division.name : request.requestor), "requestee_division": (typeof request.requestee_division === 'object' ? request.requestee_division.name : request.requestee)})

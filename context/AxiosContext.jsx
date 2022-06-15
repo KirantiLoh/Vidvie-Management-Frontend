@@ -22,7 +22,6 @@ export const AxiosProvider = ({children}) => {
             let access = await refreshingToken()
             axios.defaults.headers.common['Authorization'] = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
             originalRequest.headers.Authorization = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
-            console.log(await axios(originalRequest))
             return await axios(originalRequest)
         } 
         return Promise.reject(error)

@@ -21,9 +21,9 @@ const Items = ({items, division, isLeader, setRefetching}) => {
   return (
     <>
     <ul className={styles.items}>
-    {items.map(item => {
+    {items.map((item, index) => {
         return (
-            <li key={item.id}>
+            <li key={index}>
                 <div className={styles.item}>
                     <div className={styles.upperDetail}>
                         <h3 className={styles.itemTitle}>

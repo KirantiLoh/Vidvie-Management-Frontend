@@ -14,7 +14,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--primary-background-color);
+    background-color: var(--login-form-background-color);
+    backdrop-filter: blur(4px);
+    border: 1px #ffffff36 solid;
     padding: 20px;
     min-width: 300px;
     z-index: 3;

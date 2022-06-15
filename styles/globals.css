@@ -7,11 +7,12 @@
 }
 
 :root {
-  --primary-background-color: #fff;
-  --secondary-background-color: #fff;
-  --tertiary-background-color: #f1f1f1;
+  --primary-background-color: rgba(255, 255, 255, 0.425);
+  --secondary-background-color: rgba(255, 255, 255, 0.589);
+  --tertiary-background-color: #f1f1f13a;
+  --login-form-background-color: rgba(255, 255, 255, 0.26);
   --primary-text-color: rgb(0, 0, 0);
-  --secondary-text-color:rgba(44, 44, 44, 0.74);
+  --secondary-text-color:rgba(10, 10, 10, 0.74);
   --primary-color: #F36D25;
   --modal-error-background-color: #fff1f1;
   --modal-error-border-color: #f6d1d3;  
@@ -46,10 +47,6 @@ a:hover {
   background-color: var(--primary-color);
 }
 
-body {
-  background-color: var(--primary-background-color);
-}
-
 .main-content {
   background-color: var(--primary-background-color);
   overflow-y: hidden;
@@ -79,7 +76,7 @@ body {
 .title {
   font-size: 2.5rem;
   margin: 5px 0;
-  color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .paginations {
@@ -226,7 +223,6 @@ select {
 }
 
 form {
-  margin: 10px;
     overflow: hidden;
     transition: .5s;
 }
@@ -241,11 +237,14 @@ form {
     --tertiary-background-color: #333333;
     --primary-text-color: #fff;
     --secondary-text-color:rgba(255, 255, 255, 0.74);
-
+    --login-form-background-color: #12121291;
   }
   input[type="datetime-local"],
   input[type="date"] {
     color-scheme: dark;
+  }
+  .title {
+    color: var(--primary-color);
   }
 }
 
