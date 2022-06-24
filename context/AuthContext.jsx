@@ -50,7 +50,6 @@ export const AuthProvider = ({children}) => {
         setUser('')
         setAuthToken('')
         setIsAuthenticated(false)
-        router.replace('/account/login')
     }
 
     const refreshingToken = async () => {

@@ -47,7 +47,6 @@ const Items = ({items, isLeader, setRefetching}) => {
                     <div>
                         <p>Stock : {item.stock}</p>
                         <p>Date Updated : {(new Date(item.date_updated)).toLocaleString()}</p>
-                        <p>Desc : {item.function}</p>
                     </div>
                 </div>
             </li>

@@ -20,11 +20,6 @@ const LoginPage = () => {
   const [fieldType, setFieldType] = useState('password')
   const [iconType, setIconType] = useState(faEye)
 
-  const resetForm = () => {
-    setUsername('')
-    setPassword('')
-  }
-
   const handleClick = () => {
     if (fieldType === 'password') {
       setFieldType('text')
@@ -50,19 +45,24 @@ const LoginPage = () => {
 
   return (
     <div className={styles.loginPage}>
-      <Image className={styles.loginImage} src={LoginImg} alt={"Ruko Elang Laut"} objectFit='cover' priority/>
       <div className={styles.loginFormContainer}>
-      <Image className={styles.logoImg} src={LogoImg} alt="Logo Vidvie" objectFit='cover' width={270}/>
+      <div className={styles.loginUpper}>
+            <h1 className={styles.title}>Welcome back</h1>
+            <p>Please enter your authentication details to continue</p>
+          </div>
         <form className={styles.loginForm} onSubmit={e => login(e)}>
-          <h1>Login</h1>
-          <input type="text" className={styles.usernameField} placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-          <div className={styles.passwordFieldContainer}>
-            <input type={fieldType} className={styles.passwordField} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <label htmlFor={styles['username_field']}>Username</label>
+          <input id={styles['username_field']} type="text" className={styles.usernameField} placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} />
+          <label htmlFor={styles['password_field']}>Password</label>
+          <div  className={styles.passwordFieldContainer}>
+            <input id={styles['password_field']} type={fieldType} className={styles.passwordField} placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
             <span className={styles.showPassword} onClick={() => handleClick()}><FontAwesomeIcon icon={iconType}/></span>
           </div>
-          <button type="submit" className='primary-btn'>Login</button>
-          <button type="reset" className='secondary-btn' onClick={() => resetForm()}>Reset</button>
+            <button type="submit" disabled={!username || !password} className={`${styles.loginBtn} primary-btn`}>Login</button>
         </form>
+      </div>
+      <div className={styles.imageContainer}>
+        <Image className={styles.loginImage} src={LoginImg} alt={"Ruko Elang Laut"} objectFit='cover' layout='fill' priority/>
       </div>
       <Modal type={"error"} message={message} showModal={showModal} onClose={e => setShowModal(false)}/>
     </div>

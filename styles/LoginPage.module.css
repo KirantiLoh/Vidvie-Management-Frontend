@@ -4,42 +4,58 @@
     display: flex;
 }
 
+.imageContainer {
+    position: relative;
+    flex: 1 1 auto;
+}
+
 .loginImage {
     filter: brightness(.5);
-   flex: 1 1 200px;
 }
 
 .loginFormContainer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: var(--login-form-background-color);
-    backdrop-filter: blur(4px);
-    border: 1px #ffffff36 solid;
     padding: 20px;
-    min-width: 300px;
+    min-width: min(500px, 100vw);
     z-index: 3;
     text-align: center;
     border-radius: 3px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginUpper {
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.loginUpper p {
+    color: var(--secondary-text-color);
 }
 
 .loginForm {
     padding: 20px;
-}
-
-.loginForm h1{
-    text-align: center;
-    color: var(--primary-color);
+    width: 100%;
+    text-align: left;
 }
 
 .loginForm input {
-    margin: 15px auto;
+    border: 2px var(--secondary-text-color) solid;
+    border-radius: 3px;
+    padding: 10px;
 }
 
-.logoImg {
-    text-align: center;
-    margin: 10 auto;
+.loginForm input:focus {
+    border-color: var(--primary-color);
+}
+
+.title{
+    color: var(--primary-color);
+    font-size: 3rem;
 }
 
 .passwordFieldContainer { 
@@ -53,8 +69,15 @@
     cursor: pointer;
     transition: .3s;
     right: 0;
+    margin-right: 10px;
 }
 
 .showPassword:hover {
     color: var(--primary-color);
+}
+
+.loginBtn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
 }
