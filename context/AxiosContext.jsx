@@ -6,7 +6,7 @@ export const AxiosContext = createContext()
 
 export const AxiosProvider = ({children}) => {
 
-    const { authToken, refreshingToken } = useContext(AuthContext)
+    const { authToken, refreshingToken, setLoading, logoutUser } = useContext(AuthContext)
 
     axios.defaults.headers.common['Accept'] = 'application/json'
     axios.defaults.headers.common['Content-Type'] = 'application/json'
@@ -16,14 +16,18 @@ export const AxiosProvider = ({children}) => {
     axios.interceptors.response.use(async response => {
         return response
     }, async error => {
+        setLoading(true)
         const originalRequest = error.config
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true
             let access = await refreshingToken()
             axios.defaults.headers.common['Authorization'] = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
             originalRequest.headers.Authorization = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
+            setLoading(false)
             return await axios(originalRequest)
         } 
+        setLoading(false)
+        await logoutUser()
         return Promise.reject(error)
     })
 

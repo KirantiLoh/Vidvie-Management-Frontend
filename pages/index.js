@@ -66,7 +66,7 @@ const RecentTasks = () => {
 
     useEffect(() => {
         getRecentTasks()
-    }, [currentPage, isAuthenticated])
+    }, [currentPage])
 
   return (
     <>

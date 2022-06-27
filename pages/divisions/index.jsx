@@ -1,14 +1,11 @@
 import Divisions from '@components/Divisions/Divisions'
 import Title from '@components/Title'
-import { AuthContext } from '@context/AuthContext'
 import { withProtected } from '@hoc/route'
 import axios from 'axios'
-import React, { useContext, useEffect, useState} from 'react'
+import { useEffect, useState} from 'react'
 
 
 const DivisionsPage = () => {
-
-  const { authToken } = useContext(AuthContext)
 
   const [divisions, setDivisions] = useState([])
 

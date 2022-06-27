@@ -97,7 +97,7 @@ const StockPage = () => {
   
     useEffect(() => {
       getItemsByDivision()
-    }, [name, currentPage, refetching])
+    }, [name, refetching])
 
   return (
       <div>

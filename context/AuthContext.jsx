@@ -53,6 +53,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const refreshingToken = async () => {
+        console.log('Refreshing token')
         try {
             let response = await fetch('/api/auth/refresh',{
                 method: 'POST',
