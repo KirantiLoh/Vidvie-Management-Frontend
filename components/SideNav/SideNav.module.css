@@ -53,14 +53,12 @@
         width: 100%;
     }
     .navlinks li {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     .navlinks li h2 {
         text-align: center;
     }
-    .showMenuBtn,
-    .sideNav .hideMenuBtn,
-    .innerLogo {
+    .sideNav .hideMenuBtn {
         display: block;
         text-align: center;
         font-size: 3rem;

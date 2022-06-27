@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useContext, useRef, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import styles from './SideNav.module.css'
 import Logo from '@public/logo.png'
 import Image from 'next/image'
@@ -11,38 +11,36 @@ import { AuthContext } from '@context/AuthContext'
 
 const SideNav = () => {
 
-  const { isAuthenticated, user } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext)
 
-  const chkRef = useRef()
+  const [navPos, setNavPos] = useState('-150%')
 
   useEffect(() => {
-    let startPos, endPos
-    window.addEventListener('touchstart', (e) => {
-      startPos = e.changedTouches[0].clientX
-    })
-    window.addEventListener('touchend', (e) => {
-      endPos = e.changedTouches[0].clientX
-      if (endPos - startPos > 150 && !e.path.includes(document.querySelector('.map-container'))) {
-        chkRef.current.checked = true
-      } else if (endPos - startPos < -150) {
-        chkRef.current.checked = false
-      }
-    })
+      let startPos, endPos
+      window.addEventListener('touchstart', (e) => {
+        startPos = e.changedTouches[0].clientX
+      })
+      window.addEventListener('touchend', (e) => {
+        endPos = e.changedTouches[0].clientX
+        if (endPos - startPos > 150 && !e.path.includes(document.querySelector('.map-container'))) {
+          setNavPos('0%')
+        } else if (endPos - startPos < -150) {
+          setNavPos('-150%')
+        }
+      })
   }, [])
   
   
 
   return (
-    <>
-    <input type="checkbox" id="chk" ref={chkRef}/>
-    <nav className={styles.sideNav}>
+    <nav className={styles.sideNav} style={{left: navPos}}>
       <Link href='/'>
-        <a onClick={() => chkRef.current.checked = false}>
+        <a onClick={() => setNavPos('-150%')}>
           <Image src={Logo} alt="Logo Vidvie" objectFit='cover' />
         </a>
       </Link>
       <RenderIf isTrue={isAuthenticated} children={
-      <div className={styles.navlinksContainer} onClick={() => chkRef.current.checked = false}>
+      <div className={styles.navlinksContainer} onClick={() => setNavPos('-150%')}>
         <ul className={styles.navlinks}>
           <li>
             <h2>Tasks</h2>
@@ -134,7 +132,6 @@ const SideNav = () => {
       </div>
       }/>
     </nav>
-    </>
   )
 }
 

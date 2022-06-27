@@ -250,14 +250,6 @@ form {
 
 
 @media screen and (max-width: 560px) {
-  .showMenuBtn {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 2rem;
-  }
-  #chk:checked~nav {
-    left: 0;
-  }
   .title {
     font-size: 2rem;
   }
