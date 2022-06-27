@@ -22,7 +22,7 @@ const SideNav = () => {
       })
       window.addEventListener('touchend', (e) => {
         endPos = e.changedTouches[0].clientX
-        if (endPos - startPos > 150 && !e.path.includes(document.querySelector('.map-container'))) {
+        if (endPos - startPos > 150) {
           setNavPos('0%')
         } else if (endPos - startPos < -150) {
           setNavPos('-150%')

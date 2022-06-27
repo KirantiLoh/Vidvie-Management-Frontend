@@ -56,6 +56,7 @@
 @media screen and (max-width: 560px) {
     .itemTitle {
         max-width: 20ch;
+        width: 100%;
     }
 }
 

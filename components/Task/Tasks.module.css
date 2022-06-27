@@ -61,6 +61,7 @@
 @media screen and (max-width: 560px) {
     .taskTitle {
         max-width: 20ch;
+        width: 100%;
     }
 }
 
