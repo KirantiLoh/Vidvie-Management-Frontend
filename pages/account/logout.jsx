@@ -1,7 +1,7 @@
 import { AuthContext } from '@context/AuthContext'
 import { withProtected } from '@hoc/route'
 import { useRouter } from 'next/router'
-import React, { useEffect, useContext } from 'react'
+import  { useEffect, useContext } from 'react'
 
 const Logout = () => {
 

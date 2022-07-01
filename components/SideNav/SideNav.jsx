@@ -111,11 +111,6 @@ const SideNav = () => {
             </Link>
           </li>
           <li>
-            <Link href="/account">
-              <a><FontAwesomeIcon icon={faUser}/> Account</a>
-            </Link>
-          </li>
-          <li>
             <Link href="/stocks">
               <a><FontAwesomeIcon icon={faBoxOpen}/> Stocks</a>
             </Link>

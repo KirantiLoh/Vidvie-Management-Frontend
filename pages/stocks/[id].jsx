@@ -1,5 +1,5 @@
 import { withProtected } from '@hoc/route'
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ItemDetail from '@components/ItemDetail/ItemDetail'
 import axios from 'axios'

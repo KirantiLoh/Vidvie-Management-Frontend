@@ -251,7 +251,6 @@ form {
 
 @media screen and (max-width: 560px) {
   .title {
-    font-size: 2rem;
-    text-align: center;
+    font-size: 1.95rem;
   }
 }

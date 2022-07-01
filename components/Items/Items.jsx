@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import  { useRef } from 'react'
 import styles from './Items.module.css'
 import axios from 'axios'
 import Link from 'next/link'

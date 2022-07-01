@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect } from 'react'
+import  {createContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import jwtDecode from 'jwt-decode'
 import LoadingScreen from '@components/LoadingScreen/LoadingScreen'

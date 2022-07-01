@@ -5,7 +5,6 @@ config.autoAddCss = false
 import { AuthProvider } from '@context/AuthContext'
 import Head from 'next/head'
 import { AxiosProvider } from '@context/AxiosContext'
-import { PWACheckerProvider } from '@context/PWAChecker'
 
 function MyApp({ Component, pageProps }) {
 

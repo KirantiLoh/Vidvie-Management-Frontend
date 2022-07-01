@@ -3,7 +3,7 @@ import Title from '@components/Title'
 import { AuthContext } from '@context/AuthContext'
 import { faArrowLeft, faArrowRight, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState, useContext, useEffect } from 'react'
+import  { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import styles from '@styles/Home.module.css'
 import { withProtected } from '@hoc/route'
@@ -21,7 +21,7 @@ const RecentTasks = () => {
     const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks?priority=${priority}&status=${status}`)
     const [showFilterForm, setShowFilterForm] = useState(false)
 
-    const { user, isAuthenticated } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const filterResult = (e) => {
       e.preventDefault()

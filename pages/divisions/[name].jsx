@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import Members from '@components/Members/Members'

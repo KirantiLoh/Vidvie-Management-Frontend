@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useState } from 'react'
+import  { useEffect, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AuthContext } from '@context/AuthContext'
 import { withProtected } from '@hoc/route'
 import Tasks from '@components/Task/Tasks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faPenToSquare, faFilter } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faFilter } from '@fortawesome/free-solid-svg-icons'
 import Title from '@components/Title'
 import Requests from '@components/Request/Request'
 import axios from 'axios'
@@ -145,7 +145,7 @@ const TaskByDivision = () => {
     useEffect(() => {
         if (router.isReady) {
             const { division } = router.query
-            setDivision(division)
+            setDivision(prev => prev = division)
             setTasksPageNumber(1)
             setRequestsPageNumber(1)
             setTasksCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/division/${division}`)

@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from 'react'
+import  { useContext, createContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from './AuthContext'
 
@@ -25,7 +25,10 @@ export const AxiosProvider = ({children}) => {
             originalRequest.headers.Authorization = `${process.env.NEXT_PUBLIC_AUTH_HEADER_TYPE} ${access}`
             setLoading(false)
             return await axios(originalRequest)
-        } 
+        } else if (error.response.status === 400) {
+            setLoading(false)
+            return Promise.reject(error)
+        }
         setLoading(false)
         await logoutUser()
         return Promise.reject(error)

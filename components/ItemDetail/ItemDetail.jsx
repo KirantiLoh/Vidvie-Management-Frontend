@@ -1,7 +1,7 @@
 import RenderIf from '@components/RenderIf'
 import Title from '@components/Title'
 import { AuthContext } from '@context/AuthContext'
-import React, { useState, useContext, useEffect } from 'react'
+import  { useState, useContext, useEffect } from 'react'
 import styles from './ItemDetail.module.css'
 import Modal from '@components/Modal/Modal'
 import { useRouter } from 'next/router'

@@ -1,6 +1,6 @@
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import styles from './Modal.module.css'
 

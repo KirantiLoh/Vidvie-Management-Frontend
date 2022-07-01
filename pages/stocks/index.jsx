@@ -2,7 +2,7 @@ import StockByDivisions from '@components/StockByDivision/StockByDivisions'
 import Title from '@components/Title'
 import { withProtected } from '@hoc/route'
 import axios from 'axios'
-import React, { useEffect, useState} from 'react'
+import  { useEffect, useState} from 'react'
 
 
 const StocksPage = () => {
