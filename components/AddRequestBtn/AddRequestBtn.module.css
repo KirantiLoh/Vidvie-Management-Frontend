@@ -5,6 +5,7 @@
     font-size: 48px;
     background-color: var(--primary-color);
     border-radius: 50%;
+    border: 2px var(--primary-color) solid;
     width: 64px;
     height: 64px;
     text-align: center;
@@ -15,5 +16,6 @@
 }
 
 .addRequestBtn:hover {
-    background-color: var(--primary-text-color);
+    background-color: transparent;
+    color: var(--primary-color);
 }
