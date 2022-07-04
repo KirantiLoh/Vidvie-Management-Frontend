@@ -5,7 +5,7 @@ import styles from './StockByDivisions.module.css'
 const StockByDivisions = ({divisions}) => {
   return (
     <ul className={styles.divisions}>
-        {divisions.map(division => {
+        {divisions.length > 0 ? divisions.map(division => {
             return (
                 <li key={division.id}>
                     <h2>
@@ -15,7 +15,7 @@ const StockByDivisions = ({divisions}) => {
                     </h2>
                 </li>
             )
-        })}
+        }) : <li>No Divisions</li>}
     </ul>
   )
 }

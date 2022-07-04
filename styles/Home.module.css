@@ -3,3 +3,14 @@
     overflow: hidden;
     transition: .5s;
 }
+
+.query {
+    width: max-content;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+}
+
+.query option {
+    font-size: initial;
+}

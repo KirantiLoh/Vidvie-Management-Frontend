@@ -6,12 +6,9 @@
     margin: 10px 0;
     padding: 10px;
     background-color: var(--tertiary-background-color);
-    backdrop-filter: blur(4px);
     border-radius: 3px;
     transition: .3s;
     display: flex;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 }
 
 .tasks li:hover {
@@ -64,10 +61,3 @@
         width: 100%;
     }
 }
-
-@media (prefers-color-scheme: dark) {
-    .tasks li {
-      box-shadow: none;
-      border: none;
-    }
-  }

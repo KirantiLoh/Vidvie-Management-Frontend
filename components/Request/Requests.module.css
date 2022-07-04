@@ -11,9 +11,6 @@
     transition: .3s;
     display: flex;
     align-items: center;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 }
 
 .request {
@@ -72,10 +69,3 @@
         max-width: 20ch;
     }
 }
-
-@media (prefers-color-scheme: dark) {
-    .requests li {
-      box-shadow: none;
-      border: none;
-    }
-  }

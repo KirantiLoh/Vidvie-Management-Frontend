@@ -71,7 +71,9 @@ const AddRequestForm = () => {
   return (
     <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addRequestForm}>
+            <label htmlFor="">Title</label>
             <input value={title} onChange={e => setTitle(e.target.value)} required type="text" placeholder='Title' />
+            <label htmlFor="">Description</label>
             <textarea value={description} onChange={e => setDescription(e.target.value)} required placeholder='Description' cols="30" rows="10"></textarea>
             <label htmlFor={styles['deadline']}>Deadline</label>
             <input id={styles['deadline']} value={deadline} onChange={e => setDeadline(e.target.value)} required type="datetime-local" placeholder='Deadline' />

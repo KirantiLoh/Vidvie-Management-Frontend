@@ -20,6 +20,7 @@ const RecentTasks = () => {
     const [pageNumber, setPageNumber] = useState(1)
     const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks?priority=${priority}&status=${status}`)
     const [showFilterForm, setShowFilterForm] = useState(false)
+    const [disablePaginations, setDisablePaginations] = useState(false)
 
     const { user } = useContext(AuthContext)
 
@@ -48,9 +49,11 @@ const RecentTasks = () => {
           setPrevPage(data.previous)
           setNextPage(data.next)
         }
+        setDisablePaginations(false)
     }
 
     const goToNextPage = () => {
+        setDisablePaginations(true)
         if (nextPage) {
             setCurrentPage(nextPage)
             setPageNumber(pageNumber + 1)  
@@ -58,6 +61,7 @@ const RecentTasks = () => {
     }
 
     const goToPrevPage = () => {
+      setDisablePaginations(true)
         if (prevPage) {
             setCurrentPage(prevPage)
             setPageNumber(pageNumber - 1)  
@@ -75,11 +79,11 @@ const RecentTasks = () => {
           <h2>Recent Tasks</h2>
           <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
         </div>
-        <form onSubmit={e => filterResult(e)} className={styles.filterForm} style={{height: showFilterForm ? '414px' : '0'}}>
+        <form onSubmit={e => filterResult(e)} className={styles.filterForm} style={{height: showFilterForm ? '435px' : '0'}}>
           <h3>Filter by : </h3>
           <label htmlFor="">Status</label>
           <select value={status} onChange={e => setStatus(e.target.value)}>
-            <option value="">None</option>
+            <option value="">All</option>
             <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
             <option value="Shipping">Shipping</option>
@@ -87,7 +91,7 @@ const RecentTasks = () => {
           </select>
           <label htmlFor="">Priority</label>
           <select value={priority} onChange={e => setPriority(e.target.value)}>
-            <option value="">None</option>
+            <option value="">All</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
@@ -101,11 +105,12 @@ const RecentTasks = () => {
         </form>
         
         <Tasks tasks={recentTasks}/>
-        <ul className="paginations">
-            {prevPage ? <li onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
+        {recentTasks.length > 0 ?
+          <ul className="paginations">
+            {prevPage ? <button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></button> : <li></li>}
             <li>{pageNumber}</li>
-            {nextPage ? <li onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></li> : <li></li>}
-        </ul>
+            {nextPage ? <button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></button> : <li></li>}
+          </ul> : null}
     </>
   )
 }

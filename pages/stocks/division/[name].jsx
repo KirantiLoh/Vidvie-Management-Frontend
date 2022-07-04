@@ -105,7 +105,7 @@ const StockPage = () => {
         <form style={{height: showFilterForm ? '79px' : '0'}} onSubmit={e => e.preventDefault()}>
           <label htmlFor="">Filter By : </label>
           <select onChange={(e) => filterItem(e)}>
-            <option value="">None</option>
+            <option value="">All</option>
             <option value="Good">Good</option>
             <option value="Second">Second</option>
             <option value="Bad">Bad</option>

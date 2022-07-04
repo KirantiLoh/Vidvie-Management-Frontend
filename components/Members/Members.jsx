@@ -14,7 +14,8 @@ const Members = ({members, leader}) => {
               <h3>{member.user.first_name ? `${member.user.first_name} ${member.user.last_name}` : member.user.username} {`${leader?.user.first_name} ${leader?.user.last_name}` === `${member.user.first_name} ${member.user.last_name}` ? <FontAwesomeIcon icon={faCrown}/> : null}</h3>
           </li>
         )
-      }) : null}
+      }) : 
+      <li>No Members</li>}
     </ul>
   )
 }
