@@ -32,15 +32,18 @@ const LoginPage = () => {
   
   const login = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    const [error, status] = await loginUser(username, password)
-    if (error && status === 401) {
-      setMessage(error.message)
-      setShowModal(true)
-      setUsername('')
-      setPassword('')
+    if (!username || !password) return
+    try {
+      const [error, status] = await loginUser(username, password)
+      if (error && status === 401) {
+        setMessage(error.message)
+        setShowModal(true)
+        setUsername('')
+        setPassword('')
+      }
+    } catch (err) {
+      console.log(err)
     }
-    setLoading(false)
   }
 
   return (
@@ -64,7 +67,7 @@ const LoginPage = () => {
       <div className={styles.imageContainer}>
         <Image className={styles.loginImage} src={LoginImg} alt={"Ruko Elang Laut"} objectFit='cover' layout='fill' priority/>
       </div>
-      <Modal type={"error"} message={message} showModal={showModal} onClose={e => setShowModal(false)}/>
+      <Modal type="error" message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </div>
   )
 }

@@ -40,6 +40,7 @@ export const AuthProvider = ({children}) => {
         } catch (err) {
             console.error(err)
             logoutUser()
+            return ["There was an error on the server. Please try again later", 500]
         }
     }
 

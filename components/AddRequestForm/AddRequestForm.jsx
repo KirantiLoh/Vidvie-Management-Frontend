@@ -6,7 +6,7 @@ import styles from './AddRequestForm.module.css'
 
 const AddRequestForm = () => {
 
-    const { user, authToken } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
