@@ -55,6 +55,16 @@ const AddRequestForm = () => {
 
     }
 
+    const resetForm = (e) => {
+        e.preventDefault()
+        setTitle('')
+        setDescription('')
+        setDeadline('')
+        setPriority('')
+        setRequestor('')
+        setRequestee('')
+    }
+
 
   const getDivisions = async () => {
     let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`)
@@ -100,7 +110,7 @@ const AddRequestForm = () => {
                 }) : null}
             </select>
             <button type="submit" className='primary-btn'>Add</button>
-            <button type='reset' className='secondary-btn'>Reset</button>
+            <button type='reset' onClick={resetForm} className='secondary-btn'>Reset</button>
         </form>
         <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </>
