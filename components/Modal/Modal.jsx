@@ -15,7 +15,7 @@ const Modal = ({type, message, showModal, onClose}) => {
         setTimeout(() => {
             onClose()
         }, 3000);
-    }, [showModal])
+    }, [showModal, onClose])
     
 
 

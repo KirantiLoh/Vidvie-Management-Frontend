@@ -1,7 +1,7 @@
 import TaskDetail from '@components/TaskDetail/TaskDetail'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import  { useEffect, useState} from 'react'
+import  { useCallback, useEffect, useState} from 'react'
 import { withProtected } from '@hoc/route'
 
 const TaskDetailPage = () => {
@@ -12,7 +12,7 @@ const TaskDetailPage = () => {
     const [taskDetail, setTaskDetail] = useState({})
     const [refetchRequest, setRefetchRequest] = useState(false)
 
-    const getTaskDetail = async () => {
+    const getTaskDetail = useCallback(async () => {
         try {
            let response = await axios.get(taskURL)
             let data = await response.data
@@ -23,7 +23,7 @@ const TaskDetailPage = () => {
         } catch (e) {
             console.error(e)
         }
-    }
+    }, [taskURL])
 
     
 
@@ -38,7 +38,7 @@ const TaskDetailPage = () => {
         if (taskURL) {
             getTaskDetail()
         }
-    }, [taskURL, refetchRequest])
+    }, [taskURL, refetchRequest, getTaskDetail])
 
   return (
     <div>

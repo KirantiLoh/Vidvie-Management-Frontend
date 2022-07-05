@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react'
+import  { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import Members from '@components/Members/Members'
@@ -15,18 +15,18 @@ const DivisionPage = () => {
 
     const [data, setData] = useState([])
 
-    const getDivisionByName = async () => {
+    const getDivisionByName = useCallback(async () => {
       let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions/${name}`)
       let data = await response.data
       if (response.status === 200) {
         
         setData(data)
       }
-    }
+    }, [name])
   
     useEffect(() => {
       getDivisionByName()
-    }, [name])
+    }, [name, getDivisionByName])
 
   return (
     

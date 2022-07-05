@@ -79,8 +79,16 @@ const ItemDetail = ({items, setRefetchRequest}) => {
 
   return (
       <>
-    <RenderIf isTrue={user.username === requestor?.leader?.user.username} children={
-        <>
+    <RenderIf isTrue={user.username === requestor?.leader?.user.username} otherChoice={
+        <div className={styles.itemDetail}>
+            <Title text={name}/>
+            <p>Description : {itemFunction}</p>
+            <p>Condition : {condition}</p>
+            <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
+            <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
+        </div>
+    }>
+    <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addItemForm}>
             <Title text={`Edit Item : ${name}`}/>
             <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
@@ -103,15 +111,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         </form>
         <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </>
-    } otherChoice={
-        <div className={styles.itemDetail}>
-            <Title text={name}/>
-            <p>Description : {itemFunction}</p>
-            <p>Condition : {condition}</p>
-            <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
-            <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
-        </div>
-    }/>
+    </RenderIf>
     {items.length > 1 ? 
     <>
         <h2 className='secondary-title'>History</h2>

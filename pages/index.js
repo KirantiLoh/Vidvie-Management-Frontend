@@ -3,7 +3,7 @@ import Title from '@components/Title'
 import { AuthContext } from '@context/AuthContext'
 import { faArrowLeft, faArrowRight, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import  { useState, useContext, useEffect } from 'react'
+import  { useState, useContext, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import styles from '@styles/Home.module.css'
 import { withProtected } from '@hoc/route'
@@ -41,7 +41,7 @@ const RecentTasks = () => {
       setShowFilterForm(false)
     }
 
-    const getRecentTasks = async () => {
+    const getRecentTasks = useCallback(async () => {
         let response = await axios.get(currentPage)
         if (response.status === 200) {
           let data = await response.data
@@ -50,7 +50,7 @@ const RecentTasks = () => {
           setNextPage(data.next)
         }
         setDisablePaginations(false)
-    }
+    }, [currentPage])
 
     const goToNextPage = () => {
         setDisablePaginations(true)
@@ -70,7 +70,7 @@ const RecentTasks = () => {
 
     useEffect(() => {
         getRecentTasks()
-    }, [currentPage])
+    }, [currentPage, getRecentTasks])
 
   return (
     <>

@@ -1,4 +1,4 @@
-import  { useState, useEffect, useContext } from 'react'
+import  { useState, useEffect, useContext, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,6 +27,7 @@ const StockPage = () => {
     const [modalType, setModalType] = useState('')
     const [showAddItemForm, setShowAddItemForm] = useState(false)
     const [showFilterForm, setShowFilterForm] = useState(false)
+    const [disablePaginations, setDisablePaginations] = useState(false)
 
     const [itemName, setItemName] = useState('')
     const [itemFunction, setItemFunction] = useState('')
@@ -34,6 +35,7 @@ const StockPage = () => {
     const [condition, setCondition] = useState('')
 
     const goToNextPage = () => {
+      setDisablePaginations(true)
       if (nextPage) {
           setCurrentPage(nextPage)
           setPageNumber(pageNumber + 1)  
@@ -41,13 +43,14 @@ const StockPage = () => {
     }
 
     const goToPrevPage = () => {
+      setDisablePaginations(true)
         if (previousPage) {
             setCurrentPage(previousPage)
             setPageNumber(pageNumber - 1)  
         }
     }
 
-    const getItemsByDivision = async () => {
+    const getItemsByDivision = useCallback(async () => {
         let response = await axios.get(currentPage)
         let data = await response.data
         if (response.status === 200) {
@@ -56,7 +59,8 @@ const StockPage = () => {
           setPreviousPage(data.previous)
         }
         setRefetching(false)
-    }
+        setDisablePaginations(false)
+    }, [currentPage])
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -97,7 +101,7 @@ const StockPage = () => {
   
     useEffect(() => {
       getItemsByDivision()
-    }, [name, refetching])
+    }, [name, refetching, getItemsByDivision])
 
   return (
       <div>
@@ -151,9 +155,9 @@ const StockPage = () => {
         }
         {data?.length > 0  ? 
         <ul className="paginations">
-            {previousPage ? <li onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></li> : <li></li>}
+            {previousPage ? <button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></button> : <li></li>}
             <li>{pageNumber}</li>
-            {nextPage ? <li onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></li> : <li></li>}
+            {nextPage ? <button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></button> : <li></li>}
         </ul> : null}
         <Modal type={modalType} message={message} onClose={setShowModal} showModal={showModal}/>
       </div> 

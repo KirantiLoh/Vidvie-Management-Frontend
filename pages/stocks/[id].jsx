@@ -1,5 +1,5 @@
 import { withProtected } from '@hoc/route'
-import  { useState, useEffect } from 'react'
+import  { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import ItemDetail from '@components/ItemDetail/ItemDetail'
 import axios from 'axios'
@@ -11,7 +11,7 @@ const ItemPage = () => {
     const [items, setItems] = useState([])
     const [refetchRequest, setRefetchRequest] = useState(false)
 
-    const getItems = async () => {
+    const getItems = useCallback(async () => {
         try {
            let response = await axios.get(itemURL)
             let data = await response.data
@@ -22,7 +22,7 @@ const ItemPage = () => {
         } catch (e) {
             console.error(e)
         }
-    }
+    }, [itemURL])
 
     
 
@@ -37,7 +37,7 @@ const ItemPage = () => {
         if (itemURL) {
             getItems()
         }
-    }, [itemURL, refetchRequest])
+    }, [itemURL, refetchRequest, getItems])
 
     return (
         <div>

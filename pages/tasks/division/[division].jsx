@@ -1,4 +1,4 @@
-import  { useEffect, useContext, useState } from 'react'
+import  { useEffect, useContext, useState, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { AuthContext } from '@context/AuthContext'
 import { withProtected } from '@hoc/route'
@@ -34,7 +34,7 @@ const TaskByDivision = () => {
 
     const [showFilterForm, setShowFilterForm] = useState(false)
   
-    const fetchDatas = async () => {
+    const fetchDatas = useCallback(async () => {
         try {
             let response = await axios.get(currentPage)
               let data = await response.data
@@ -50,7 +50,7 @@ const TaskByDivision = () => {
         }
         setRefetchRequest(false)
         setDisablePaginations(false)
-    }
+    }, [currentPage])
 
     const clearFilter = () => {
       setPriority('')
@@ -99,7 +99,7 @@ const TaskByDivision = () => {
         if (currentPage) {
             fetchDatas()
         }
-    }, [currentPage, refetchRequest])
+    }, [currentPage, refetchRequest, fetchDatas])
 
   return (
     <div>

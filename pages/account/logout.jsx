@@ -12,6 +12,7 @@ const Logout = () => {
     useEffect(() => {
         logoutUser()
         router.replace('/account/login')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 }
 

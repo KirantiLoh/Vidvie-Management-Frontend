@@ -39,7 +39,7 @@ const SideNav = () => {
           <Image src={Logo} alt="Logo Vidvie" objectFit='cover' />
         </a>
       </Link>
-      <RenderIf isTrue={isAuthenticated} children={
+      <RenderIf isTrue={isAuthenticated}>
       <div className={styles.navlinksContainer} onClick={() => setNavPos('-150%')}>
         <ul className={styles.navlinks}>
           <li>
@@ -125,7 +125,7 @@ const SideNav = () => {
           </li>
         </ul>
       </div>
-      }/>
+      </RenderIf>
     </nav>
   )
 }

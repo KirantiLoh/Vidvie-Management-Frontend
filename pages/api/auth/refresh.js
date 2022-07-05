@@ -1,6 +1,6 @@
 import cookie from 'cookie'
 
-export default async (req, res) => {
+export default async function handler(req, res) {
     if (req.method === 'POST') {
         const cookies = cookie.parse(req.headers.cookie ?? '')
 

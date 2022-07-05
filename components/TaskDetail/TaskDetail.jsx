@@ -93,7 +93,18 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
       }, [taskDetail])
 
   return (
-    <RenderIf isTrue={user.division === currentRequestor?.name || user.division === currentRequestee?.name} children={
+    <RenderIf isTrue={user.division === currentRequestor?.name || user.division === currentRequestee?.name} otherChoice={
+        <div className={styles.taskDetail}>
+            <Title text={title}/>
+            <p>Status : {status}</p>
+            <p>Priority : {priority}</p>
+            <p>Requested by :  {requestor?.name ? requestor.name : requestor}</p>
+            <p>Requested to : {requestee?.name ? requestee.name : requestee}</p>
+            <p>Requested on : {dateAdded ? (new Date(dateAdded)).toLocaleString() : null}</p>
+            <p>Deadline : {deadline ? (new Date(deadline)).toLocaleString() : null}</p>
+            <p>Description : {description}</p>
+        </div>
+    }>
         <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addRequestForm}>
             <Title text={`Edit Request : ${title}`}/>
@@ -135,18 +146,7 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
         </form>
         <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </>
-    } otherChoice={
-        <div className={styles.taskDetail}>
-            <Title text={title}/>
-            <p>Status : {status}</p>
-            <p>Priority : {priority}</p>
-            <p>Requested by :  {requestor?.name ? requestor.name : requestor}</p>
-            <p>Requested to : {requestee?.name ? requestee.name : requestee}</p>
-            <p>Requested on : {dateAdded ? (new Date(dateAdded)).toLocaleString() : null}</p>
-            <p>Deadline : {deadline ? (new Date(deadline)).toLocaleString() : null}</p>
-            <p>Description : {description}</p>
-        </div>
-    }/>
+    </RenderIf>
   )
 }
 
