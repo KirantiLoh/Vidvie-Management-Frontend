@@ -27,7 +27,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
 
       const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!name || !itemFunction || !condition || !stock) return
+        if (!name || !itemFunction || !condition || stock < 1) return
         try {
             let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/${id}`, 
             {"name": name, "stock": stock, "function": itemFunction, "condition": condition})
