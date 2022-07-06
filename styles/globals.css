@@ -164,25 +164,10 @@ option {
   background-color: var(--primary-background-color);
 }
 
-input[type="datetime-local"] {
-  resize: none;
-}
-
-
-input[type="checkbox"]::before {
-  content: "";
-  width: inherit;
-  height: inherit;
-  border: none;
-  background-color: transparent;
-  z-index: -1;
-  transition: .3s;
-}
-
-
 input[type="datetime-local"],
 input[type="date"] {
   color-scheme: dark;
+  resize: none;
 }
 
 select {
