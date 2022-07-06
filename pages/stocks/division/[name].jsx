@@ -2,7 +2,7 @@ import  { useState, useEffect, useContext, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faFilter, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faFilter, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import axios from 'axios'
 import Items from '@components/Items/Items'
@@ -105,9 +105,17 @@ const StockPage = () => {
 
   return (
       <div>
-        <h1 className="title"><Link href="/stocks"><a><FontAwesomeIcon icon={faArrowLeft}/></a></Link> {data[0]?.division?.name ? data[0]?.division?.name : `${(name.charAt(0).toUpperCase() + name.slice(1)).replace('-', ' ')}`}</h1>
-        <form style={{height: showFilterForm ? '79px' : '0'}} onSubmit={e => e.preventDefault()}>
-          <label htmlFor="">Filter By : </label>
+        <h1 className="title">
+          <Link href="/stocks">
+            <a>
+              <FontAwesomeIcon icon={faArrowLeft}/>
+            </a>
+          </Link> 
+          {data[0]?.division?.name ? data[0]?.division?.name : `${(name.charAt(0).toUpperCase() + name.slice(1)).replace('-', ' ')}`}
+        </h1>
+        <form style={{height: showFilterForm ? '105px' : '0', marginBottom: '10px'}} onSubmit={e => e.preventDefault()}>
+          <h3 className='secondary-title'>Filter by : </h3>
+          <label htmlFor="">Stock</label>
           <select onChange={(e) => filterItem(e)}>
             <option value="">All</option>
             <option value="Good">Good</option>
@@ -117,7 +125,7 @@ const StockPage = () => {
         </form>
         
         {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
-          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '430px' : '0'}}>
+          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '440px' : '0'}}>
             <h3 className='secondary-title'>Add New Item</h3>
             <label htmlFor="">Name</label>
             <input type="text" placeholder='Name' value={itemName} onChange={e => setItemName(e.target.value)} />

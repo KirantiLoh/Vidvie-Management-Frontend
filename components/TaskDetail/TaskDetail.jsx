@@ -130,8 +130,7 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             <select value={requestor?.name} onChange={e => setRequestor(e.target.value)} required id={styles['priority']}>
                 {user.division === 'Branding' && divisionsChoices.length > 0 ? divisionsChoices.map((divisionChoice) => {
                     return  <option key={divisionChoice.id} value={divisionChoice.name}>{divisionChoice.name}</option>
-                }) : null}
-                {user.division === 'Direksi' ? <option value="Vidvie">Vidvie</option> : null}
+                }) : <option value={user.division}>{user.division}</option>}
             </select>
             <label htmlFor={styles['requestee']}>Requested to</label>
             <select value={requestee?.name} onChange={e => setRequestee(e.target.value)} required>

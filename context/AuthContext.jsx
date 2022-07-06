@@ -1,4 +1,4 @@
-import  {createContext, useState, useEffect } from 'react'
+import  {createContext, useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import jwtDecode from 'jwt-decode'
 import LoadingScreen from '@components/LoadingScreen/LoadingScreen'
@@ -53,7 +53,7 @@ export const AuthProvider = ({children}) => {
         setIsAuthenticated(false)
     }
 
-    const refreshingToken = async () => {
+    const refreshingToken = useCallback(async () => {
         console.log('Refreshing token')
         try {
             let response = await fetch('/api/auth/refresh',{
@@ -76,7 +76,7 @@ export const AuthProvider = ({children}) => {
             logoutUser()
         }
         setLoading(false)
-    }
+    }, [])
 
     const contextData = {
         user: user,
@@ -92,7 +92,7 @@ export const AuthProvider = ({children}) => {
     
     useEffect(() => {
         refreshingToken()
-    }, [])
+    }, [refreshingToken])
 
     return (
         <AuthContext.Provider value={contextData}>
