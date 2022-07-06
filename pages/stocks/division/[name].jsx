@@ -64,7 +64,7 @@ const StockPage = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault()
-      if (!itemName || stock < 1 || !condition || !itemFunction) return
+      if (!itemName || stock < 0 || !condition || !itemFunction) return
       try {
         let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, {
           name: itemName,
