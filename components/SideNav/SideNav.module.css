@@ -44,7 +44,7 @@
     .sideNav {
         position: fixed;
         top: 0;
-        left: -150%;
+        left: -100%;
         transition: .3s ease-in-out;
         width: 100%;
     }
