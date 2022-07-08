@@ -13,7 +13,7 @@ const SideNav = () => {
 
   const { isAuthenticated } = useContext(AuthContext)
 
-  const [navPos, setNavPos] = useState(-100)
+  const [navPos, setNavPos] = useState('-100%')
 
   useEffect(() => {
       let startPos, endPos
@@ -22,26 +22,25 @@ const SideNav = () => {
       })
       window.addEventListener('touchend', (e) => {
         endPos = e.changedTouches[0].clientX
-        if (endPos - startPos > 120) {
-          setNavPos(0)
-        } else if (endPos - startPos < -120) {
-          setNavPos(-100)
+        if (endPos - startPos > 150) {
+          setNavPos('0%')
+        } else if (endPos - startPos < -150) {
+          setNavPos('-100%')
         }
       })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   
 
   return (
-    <nav className={styles.sideNav} style={{left: `${navPos}%`}}>
+    <nav className={styles.sideNav} style={{left: navPos}}>
       <Link href='/'>
-        <a onClick={() => setNavPos(-100)}>
+        <a onClick={() => setNavPos('-100%')}>
           <Image src={Logo} alt="Logo Vidvie" objectFit='cover' />
         </a>
       </Link>
       <RenderIf isTrue={isAuthenticated}>
-      <div className={styles.navlinksContainer} onClick={() => setNavPos(-100)}>
+      <div className={styles.navlinksContainer} onClick={() => setNavPos('-100%')}>
         <ul className={styles.navlinks}>
           <li>
             <h2>Tasks</h2>
