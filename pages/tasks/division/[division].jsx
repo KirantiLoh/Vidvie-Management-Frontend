@@ -28,7 +28,6 @@ const TaskByDivision = () => {
     const [status, setStatus] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
-    const [showActionForm, setShowActionForm] = useState(false)
     const [refetchRequest, setRefetchRequest] = useState(false)
     const [disablePaginations, setDisablePaginations] = useState(false)
 
@@ -138,8 +137,8 @@ const TaskByDivision = () => {
           <button className="secondary-btn" onClick={() => clearFilter()}>Clear</button>
         </form>
         {query === 'tasks' 
-        ? <Tasks tasks={datas} division={division} isLeader={datas[0]?.requestee_division?.name === user.division} inTaskbyDivisionPage={true} showActionForm={showActionForm} setShowActionForm={setShowActionForm} setRefetching={setRefetchRequest}/>
-        : <Requests requests={datas} division={division} isLeader={datas[0]?.requestor_division?.name === user.division} inTaskbyDivisionPage={true} showActionForm={showActionForm} setShowActionForm={setShowActionForm} setRefetching={setRefetchRequest}/>
+        ? <Tasks tasks={datas} division={division} isLeader={datas[0]?.requestee_division?.name === user.division} inTaskbyDivisionPage={true} setRefetching={setRefetchRequest}/>
+        : <Requests requests={datas} division={division} isLeader={datas[0]?.requestor_division?.name === user.division} inTaskbyDivisionPage={true}setRefetching={setRefetchRequest}/>
         }
         {datas.length > 0 ?
           <ul className="paginations">

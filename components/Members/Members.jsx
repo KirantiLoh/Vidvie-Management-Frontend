@@ -1,6 +1,6 @@
 import { faCrown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+
 import styles from './Members.module.css'
 
 const Members = ({members, leader}) => {

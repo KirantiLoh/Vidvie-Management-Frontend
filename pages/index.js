@@ -74,7 +74,10 @@ const RecentTasks = () => {
 
   return (
     <>
-        <Title text={`Welcome ${user.name}`}/>
+        <Title text="Welcome"/>
+        <h3 className="secondary-title">
+        {user.name ? user.name : user.username} ({user.leader_of ? `Ketua ${user.leader_of}` : user.division})
+        </h3>
         <div className='upper'>
           <h2>Recent Tasks</h2>
           <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>

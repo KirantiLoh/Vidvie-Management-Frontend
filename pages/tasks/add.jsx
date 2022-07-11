@@ -1,7 +1,6 @@
 import AddRequestForm from '@components/AddRequestForm/AddRequestForm'
 import Title from '@components/Title'
 import { withProtected } from '@hoc/route'
-import React from 'react'
 
 const AddNewTaskPage = () => {
   return (

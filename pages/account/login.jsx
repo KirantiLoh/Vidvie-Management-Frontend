@@ -49,11 +49,11 @@ const LoginPage = () => {
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginFormContainer}>
-      <div className={styles.loginUpper}>
+        <form className={styles.loginForm} onSubmit={e => login(e)}>
+        <div className={styles.loginUpper}>
             <h1 className={styles.title}>Welcome back</h1>
             <p>Please enter your authentication details to continue</p>
           </div>
-        <form className={styles.loginForm} onSubmit={e => login(e)}>
           <label htmlFor={styles['username_field']}>Username</label>
           <input id={styles['username_field']} type="text" className={styles.usernameField} placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} />
           <label htmlFor={styles['password_field']}>Password</label>

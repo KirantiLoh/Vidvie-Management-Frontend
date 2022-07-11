@@ -80,6 +80,11 @@ a:hover {
   color: var(--primary-color);
 }
 
+.secondary-title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
 .paginations {
   width: 100%;
   display: flex;
