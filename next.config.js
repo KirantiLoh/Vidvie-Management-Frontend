@@ -8,7 +8,8 @@ const nextConfig = withPWA({
     register: true,
     skipWaiting: true,
     disable: process.env.NODE_ENV === 'development'
-  }
+  },
+  swcMinify: true
 })
 
 module.exports = nextConfig
