@@ -139,10 +139,6 @@ a:hover {
   border: 2px var(--primary-color) solid;
 }
 
-form {
-  overflow-y: auto;
-}
-
 form::-webkit-scrollbar {
   display: none;
 }

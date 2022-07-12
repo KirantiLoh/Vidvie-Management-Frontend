@@ -131,7 +131,7 @@ const StockPage = () => {
         </form>
         
         {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
-          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '480px' : '0'}}>
+          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '480px' : '0', overflowY: showAddItemForm ? 'auto' : 'hidden'}}>
             <h2 className='secondary-title'>Add New Item</h2>
             <label htmlFor="name">Name</label>
             <input type="text" id="name" placeholder='Name' value={itemName} onChange={e => setItemName(e.target.value)} />
