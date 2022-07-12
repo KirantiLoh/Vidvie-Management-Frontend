@@ -139,6 +139,10 @@ a:hover {
   border: 2px var(--primary-color) solid;
 }
 
+.back-btn {
+  margin-right: 10px;
+}
+
 form::-webkit-scrollbar {
   display: none;
 }

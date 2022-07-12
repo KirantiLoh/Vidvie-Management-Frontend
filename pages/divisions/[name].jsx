@@ -31,7 +31,7 @@ const DivisionPage = () => {
   return (
     
       <div>
-        <h1 className="title"><Link href="/divisions"><a><FontAwesomeIcon icon={faArrowLeft}/></a></Link> {data.name}</h1>
+        <h1 className="title"><Link href="/divisions"><a className='back-btn'><FontAwesomeIcon icon={faArrowLeft}/></a></Link> {data.name}</h1>
         {data.members?.length > 0  ? 
         <>
           <div className="upper">

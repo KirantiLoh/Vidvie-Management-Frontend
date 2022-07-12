@@ -113,7 +113,7 @@ const StockPage = () => {
       <div>
         <h1 className="title">
           <Link href="/stocks">
-            <a>
+            <a className='back-btn'>
               <FontAwesomeIcon icon={faArrowLeft}/>
             </a>
           </Link> 
