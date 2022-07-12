@@ -98,6 +98,12 @@ const StockPage = () => {
       setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}?condition=${e.target.value}`)
       setShowFilterForm(false)
     }
+
+    const handleStockChange = (e) => {
+      e.preventDefault()
+      if (Number.isNaN(Number(e.target.value))) return
+      setStock(e.target.value)
+    }
   
     useEffect(() => {
       getItemsByDivision()
@@ -113,8 +119,8 @@ const StockPage = () => {
           </Link> 
           {data[0]?.division?.name ? data[0]?.division?.name : `${(name.charAt(0).toUpperCase() + name.slice(1)).replace('-', ' ')}`}
         </h1>
-        <form style={{height: showFilterForm ? '105px' : '0', marginBottom: '10px'}} onSubmit={e => e.preventDefault()}>
-          <h3 className='secondary-title'>Filter by : </h3>
+        <form style={{height: showFilterForm ? '140px' : '0', marginBottom: '10px'}} onSubmit={e => e.preventDefault()}>
+          <h2 className='secondary-title'>Filter by : </h2>
           <label htmlFor="">Stock</label>
           <select onChange={(e) => filterItem(e)}>
             <option value="">All</option>
@@ -125,14 +131,14 @@ const StockPage = () => {
         </form>
         
         {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
-          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '440px' : '0'}}>
-            <h3 className='secondary-title'>Add New Item</h3>
-            <label htmlFor="">Name</label>
-            <input type="text" placeholder='Name' value={itemName} onChange={e => setItemName(e.target.value)} />
-            <label htmlFor="">Function</label>
-            <textarea placeholder='Function' value={itemFunction} onChange={e => setItemFunction(e.target.value)}></textarea>
-            <label htmlFor="">Stock</label>
-            <input type="number" placeholder='Stock' value={stock} onChange={(e) => setStock(e.target.value)} />
+          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '480px' : '0'}}>
+            <h2 className='secondary-title'>Add New Item</h2>
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" placeholder='Name' value={itemName} onChange={e => setItemName(e.target.value)} />
+            <label htmlFor="function">Function</label>
+            <textarea id="function" placeholder='Function' value={itemFunction} onChange={e => setItemFunction(e.target.value)}></textarea>
+            <label htmlFor="stock">Stock</label>
+            <input type="number" id="stock" placeholder='Stock' value={stock} onChange={handleStockChange} />
             <label htmlFor="">Condition</label>
             <select value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value="" hidden disabled>Condition</option>
@@ -145,7 +151,7 @@ const StockPage = () => {
         {data?.length > 0  ? 
         <>
           <div className="upper">
-            <h3>Items</h3>
+            <h2 className="secondary-title">Items</h2>
             <div>
               {user.username === data[0].division?.leader?.user.username ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
               <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
@@ -163,9 +169,9 @@ const StockPage = () => {
         }
         {data?.length > 0  ? 
         <ul className="paginations">
-            {previousPage ? <button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></button> : <li></li>}
+            {previousPage ? <li><button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button' aria-label="pagination-button"><FontAwesomeIcon icon={faArrowLeft}/></button></li> : <li></li>}
             <li>{pageNumber}</li>
-            {nextPage ? <button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></button> : <li></li>}
+            {nextPage ? <li><button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button' aria-label="pagination-button"><FontAwesomeIcon icon={faArrowRight}/></button></li> : <li></li>}
         </ul> : null}
         <Modal type={modalType} message={message} onClose={setShowModal} showModal={showModal}/>
       </div> 

@@ -61,19 +61,6 @@ a:hover {
   overflow-y: auto;
 }
 
-#chk,
-.showMenuBtn,
-.hideMenuBtn {
-    display: none;
-    color: var(--primary-text-color);
-    transition: .3s;
-}
-
-.showMenuBtn:hover,
-.hideMenuBtn:hover {
-  color: var(--primary-color);
-}
-
 .title {
   font-size: 2.5rem;
   margin: 5px 0;
@@ -81,7 +68,7 @@ a:hover {
 }
 
 .secondary-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 15px;
 }
 
@@ -93,10 +80,16 @@ a:hover {
   list-style: none;
 }
 
-.paginations li,
-.pagination-button {
+.paginations li {
   font-size: 1.5rem;
   margin: 10px;
+  height: 32px;
+  width: 32px;
+  text-align: center;
+}
+
+.pagination-button {
+  font-size: 1.5rem;
   border-radius: 50%;
   height: 32px;
   width: 32px;
@@ -144,6 +137,14 @@ a:hover {
   transition: .3s;
   cursor: pointer;
   border: 2px var(--primary-color) solid;
+}
+
+form {
+  overflow-y: auto;
+}
+
+form::-webkit-scrollbar {
+  display: none;
 }
 
 input, select, textarea {
@@ -222,5 +223,8 @@ form {
 @media screen and (max-width: 560px) {
   .title {
     font-size: 1.95rem;
+  }
+  .secondary-title {
+    font-size: 1.5rem;
   }
 }

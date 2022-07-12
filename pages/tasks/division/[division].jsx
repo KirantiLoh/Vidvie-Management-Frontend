@@ -114,25 +114,25 @@ const TaskByDivision = () => {
         </div>
         <form onSubmit={e => filterResult(e)} className={styles.filterForm} style={{height: showFilterForm ? '435px' : '0'}}>
           <h3>Filter by : </h3>
-          <label htmlFor="">Status</label>
-          <select value={status} onChange={e => setStatus(e.target.value)}>
+          <label htmlFor="status">Status</label>
+          <select id="status" value={status} onChange={e => setStatus(e.target.value)}>
             <option value="">All</option>
             <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
             <option value="Shipping">Shipping</option>
             <option value="Finished">Finished</option>
           </select>
-          <label htmlFor="">Priority</label>
-          <select value={priority} onChange={e => setPriority(e.target.value)}>
+          <label htmlFor="priority">Priority</label>
+          <select id="priority" value={priority} onChange={e => setPriority(e.target.value)}>
             <option value="">All</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
           </select>
-          <label htmlFor="">Start Date</label>
-          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}/>
-          <label htmlFor="">End Date</label>
-          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+          <label htmlFor="startDate">Start Date</label>
+          <input type="date" id="startDate" value={startDate} onChange={e => setStartDate(e.target.value)}/>
+          <label htmlFor="endDate">End Date</label>
+          <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)}/>
           <button className="primary-btn">Filter</button>
           <button className="secondary-btn" onClick={() => clearFilter()}>Clear</button>
         </form>
@@ -142,9 +142,9 @@ const TaskByDivision = () => {
         }
         {datas.length > 0 ?
           <ul className="paginations">
-            {prevPage ? <button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowLeft}/></button> : <li></li>}
+            {prevPage ? <li><button disabled={disablePaginations} onClick={() => goToPrevPage()} className='pagination-button' aria-label="pagination-button"><FontAwesomeIcon icon={faArrowLeft}/></button></li> : <li></li>}
             <li>{pageNumber}</li>
-            {nextPage ? <button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button'><FontAwesomeIcon icon={faArrowRight}/></button> : <li></li>}
+            {nextPage ? <li><button disabled={disablePaginations} onClick={() => goToNextPage()} className='pagination-button' aria-label="pagination-button"><FontAwesomeIcon icon={faArrowRight}/></button></li> : <li></li>}
           </ul> : null}
     </div>
   )

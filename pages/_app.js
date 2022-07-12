@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/manifest.json"/>
         <link rel="apple-touch-icon" href="/logo-VIDVIE-icon.png"/>
         <meta name="theme-color" content='#F36D25'/>
-        <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no' />
+        <meta name='viewport' content={`width=device-width, initial-scale=1, viewport-fit=cover${typeof window !== 'undefined' && navigator.userAgentData.mobile ? ', user-scalable=no' : ''}`} />
       </Head>
         <AuthProvider>
           <AxiosProvider>

@@ -63,6 +63,12 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         }
     }
 
+    const handleStockChange = (e) => {
+        e.preventDefault()
+        if (Number.isNaN(Number(e.target.value))) return
+        setStock(e.target.value)
+      }
+
       useEffect(() => {
         if (items.length > 0) {
             let itemDetail = items[0]
@@ -96,7 +102,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <label htmlFor={styles['name']}>Name</label>
             <input id={styles['name']} value={name} onChange={e => setName(e.target.value)} required type="text" placeholder='Title' />
             <label htmlFor="">Stock</label>
-            <input required type="number" value={stock} onChange={e => setStock(e.target.value)} />
+            <input required type="number" value={stock} onChange={handleStockChange} />
             <label htmlFor={styles['priority']}>Condition</label>
             <select required value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value="" hidden disabled>Condition</option>
