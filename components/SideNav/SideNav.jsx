@@ -4,7 +4,7 @@ import styles from './SideNav.module.css'
 import Logo from '@public/logo.png'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faUser, faSignIn, faTimes, faPaintBrush, faUserFriends, faTruck, faUsersCog, faGlobe, faTags, faStore, faFolder, faUsersBetweenLines, faEllipsis, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faComputer, faSignIn, faTimes, faPaintBrush, faUserFriends, faTruck, faUsersCog, faGlobe, faTags, faStore, faFolder, faUsersBetweenLines, faEllipsis, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import VidvieLogo from '@public/logo-VIDVIE-icon.png'
 import RenderIf from '@components/RenderIf'
 import { AuthContext } from '@context/AuthContext'
@@ -68,6 +68,11 @@ const SideNav = () => {
           <li>
             <Link href="/tasks/division/hrd">
               <a><FontAwesomeIcon icon={faUsersCog}/> HRD</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/tasks/division/it">
+              <a><FontAwesomeIcon icon={faComputer}/> IT</a>
             </Link>
           </li>
           <li>

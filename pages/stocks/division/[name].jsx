@@ -121,8 +121,8 @@ const StockPage = () => {
         </h1>
         <form style={{height: showFilterForm ? '140px' : '0', marginBottom: '10px'}} onSubmit={e => e.preventDefault()}>
           <h2 className='secondary-title'>Filter by : </h2>
-          <label htmlFor="">Stock</label>
-          <select onChange={(e) => filterItem(e)}>
+          <label htmlFor="condition">Condition</label>
+          <select id="condition" onChange={(e) => filterItem(e)}>
             <option value="">All</option>
             <option value="Good">Good</option>
             <option value="Second">Second</option>
