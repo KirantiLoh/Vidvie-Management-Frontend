@@ -12,3 +12,14 @@
     max-width: 85ch;
     margin: 10px 0;
 }
+
+.imageContainer {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+.imageContainer img {
+    border-radius: 50%;
+}

@@ -9,7 +9,10 @@ const nextConfig = withPWA({
     skipWaiting: true,
     disable: process.env.NODE_ENV === 'development'
   },
-  swcMinify: true
+  swcMinify: true,
+  images: {
+    domains: ['res.cloudinary.com']
+  }
 })
 
 module.exports = nextConfig

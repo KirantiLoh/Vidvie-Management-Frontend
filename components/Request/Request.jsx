@@ -72,9 +72,12 @@ const Requests = ({showActionForm, setShowActionForm, requests, isLeader, setRef
                     <p className={styles.status} style={{backgroundColor: setStatusColor(request.status)}}>{request.status}</p>}
                 </div>
                 </div>
-                <p>Requesting to :  {request.requestee_division.name}</p>
-                <p>Requested on : {(new Date(request.date_added)).toLocaleString()}</p>
-                <p>Deadline : {(new Date(request.deadline)).toLocaleString()}</p>
+                <div className={styles.extraDetails}>
+                  <p>Requesting to :  {request.requestee_division.name}</p>
+                  <p>Requested on : {(new Date(request.date_added)).toLocaleString()}</p>
+                  <p>Deadline : {(new Date(request.deadline)).toLocaleString()}</p>
+                </div>
+                
               </div>
             </li>
           )

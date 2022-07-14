@@ -73,7 +73,7 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, setRefetching})
                     <p className={styles.status} style={{backgroundColor: setStatusColor(task.status)}}>{task.status}</p>}
                 </div>
               </div>
-              <div className={styles.details}>
+              <div className={styles.extraDetails}>
                 <p>Requested by : {task.requestor_division.name}</p>
                 {!inTaskbyDivisionPage ? <p>Requested to : {task.requestee_division.name}</p> : null}
                 <p>Date Added : {(new Date(task.date_added)).toLocaleString()}</p>

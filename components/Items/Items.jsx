@@ -1,11 +1,9 @@
-import  { useRef } from 'react'
 import styles from './Items.module.css'
 import axios from 'axios'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Items = ({items, isLeader, setRefetching}) => {
-
-    const descRef = useRef()
 
     const changeItemCondition = async (e, item) => {
       e.preventDefault()
@@ -26,6 +24,7 @@ const Items = ({items, isLeader, setRefetching}) => {
     {items.map((item, index) => {
         return (
             <li key={index}>
+                {item.image ? <Image src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${item.image}`} alt={item.name} width={80} height={80} style={{borderRadius: '50%'}}/> : null}
                 <div className={styles.item}>
                     <div className={styles.upperDetail}>
                         <h3 className={styles.itemTitle}>
@@ -44,9 +43,12 @@ const Items = ({items, isLeader, setRefetching}) => {
                         <span style={{backgroundColor: setConditionColor(item.condition)}} className={styles.condition}>{item.condition}</span>
                       }
                     </div>
-                    <div>
+                    <div className={styles.extraDetails}>
                         <p>Stock : {item.stock}</p>
-                        <p>Date Updated : {(new Date(item.date_updated)).toLocaleString()}</p>
+                        <p>Borrowed : {item.borrowed}</p>
+                        <p>Broken : {item.broken}</p>
+                        <p>Last Updated : {(new Date(item.date_updated)).toLocaleString()}</p>
+                        <p>Date Added : {(new Date(item.date_added)).toLocaleString()}</p>
                     </div>
                 </div>
             </li>

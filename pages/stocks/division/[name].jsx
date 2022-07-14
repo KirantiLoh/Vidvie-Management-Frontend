@@ -1,4 +1,4 @@
-import  { useState, useEffect, useContext, useCallback } from 'react'
+import  { useState, useEffect, useContext, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,6 +16,8 @@ const StockPage = () => {
 
     const { user } = useContext(AuthContext)
 
+    const imageRef = useRef()
+
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`)
     const [nextPage, setNextPage] = useState('')
@@ -28,9 +30,11 @@ const StockPage = () => {
     const [showAddItemForm, setShowAddItemForm] = useState(false)
     const [showFilterForm, setShowFilterForm] = useState(false)
     const [disablePaginations, setDisablePaginations] = useState(false)
+    const [disableBtn, setDisableBtn] = useState(false)
 
     const [itemName, setItemName] = useState('')
     const [itemFunction, setItemFunction] = useState('')
+    const [itemImage, setItemImage] = useState('')
     const [stock, setStock] = useState(1)
     const [condition, setCondition] = useState('')
 
@@ -64,14 +68,26 @@ const StockPage = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault()
-      if (!itemName || stock < 0 || !condition || !itemFunction) return
+      setDisableBtn(true)
+      if (!itemName || stock < 0 || !condition || !itemFunction) {
+        setDisableBtn(false)
+        return
+      }
+      let formData = new FormData()
+      formData.append("name", itemName)
+      formData.append("function", itemFunction)
+      formData.append("condition", condition)
+      formData.append("stock", stock)
+      itemImage ? formData.append("image", itemImage) : null
+
       try {
-        let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, {
-          name: itemName,
-          function: itemFunction,
-          condition: condition,
-          stock: stock
-        })
+        let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, 
+          formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          }
+        )
         let data = await response.data
         if (response.status === 201) {
           setMessage(data.message)
@@ -82,7 +98,7 @@ const StockPage = () => {
       }
       catch (err) {
         console.error(err)
-        setMessage(data.message)
+        setMessage(err.response.data.message)
         setShowModal(true)
         setModalType('error')
       }
@@ -90,13 +106,20 @@ const StockPage = () => {
       setItemFunction('')
       setStock(1)
       setCondition('')
+      setItemImage('')
+      imageRef.current.value=''
       setShowAddItemForm(false)
+      setDisableBtn(false)
     }
 
     const filterItem = (e) => {
       e.preventDefault()
       setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}?condition=${e.target.value}`)
       setShowFilterForm(false)
+    }
+
+    const handleImageChange = (e) => {
+      setItemImage(e.target.files[0])
     }
 
     const handleStockChange = (e) => {
@@ -131,7 +154,7 @@ const StockPage = () => {
         </form>
         
         {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
-          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '480px' : '0', overflowY: showAddItemForm ? 'auto' : 'hidden'}}>
+          <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '560px' : '0', overflowY: showAddItemForm ? 'auto' : 'hidden'}}>
             <h2 className='secondary-title'>Add New Item</h2>
             <label htmlFor="name">Name</label>
             <input type="text" id="name" placeholder='Name' value={itemName} onChange={e => setItemName(e.target.value)} />
@@ -146,7 +169,9 @@ const StockPage = () => {
               <option value="Second">Second</option>
               <option value="Bad">Bad</option>
             </select>
-            <button className="primary-btn" type='submit'>Add</button>
+            <label htmlFor="image">Photo</label>
+            <input type="file" ref={imageRef} onChange={handleImageChange} id="image" accept='image/jpeg,image/jpg,image/png'/>
+            <button className="primary-btn" type='submit' disabled={disableBtn}>Add</button>
           </form> : null}
         {data?.length > 0  ? 
         <>

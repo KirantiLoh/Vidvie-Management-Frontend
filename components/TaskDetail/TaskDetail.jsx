@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const TaskDetail = ({taskDetail, setRefetchRequest}) => {
 
-    const { user, authToken } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const router = useRouter()
 
@@ -28,6 +28,7 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
     const [showModal, setShowModal] = useState(false)
     const [modalType, setModalType] = useState('')
     const [message, setMessage] = useState('')
+    const [disableBtn, setDisableBtn] = useState(false)
 
     const getDivisions = async () => {
         let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/divisions`)
@@ -39,7 +40,11 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
 
       const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!title || !description || !status || !priority || !requestor || !deadline) return
+        setDisableBtn(true)
+        if (!title || !description || !status || !priority || !requestor || !deadline) {
+            setDisableBtn(false)
+            return
+        }
         let deadlineDate = (new Date(deadline)).toISOString()
         try {
             let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks/${id}`,
@@ -57,6 +62,7 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
         } finally {
             setShowModal(true)
             setRefetchRequest(true)
+            setDisableBtn(false)
         }
     }
 
@@ -69,7 +75,7 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             }
         } catch (err) {
             console.error(err)
-            setMessage(err)
+            setMessage(err.response.data.message)
             setModalType('error')
         }
     }
@@ -140,8 +146,8 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             </select>
             <label htmlFor={styles['desc']}>Description</label>
             <textarea id={styles['desc']} value={description} onChange={e => setDescription(e.target.value)} required placeholder='Description' cols="30" rows="10"></textarea>
-            <button type="submit" className='primary-btn'>Update</button>
-            <button type='button' onClick={() => deleteTask()} className="secondary-btn">Delete</button>
+            <button type="submit" disabled={disableBtn} className='primary-btn'>Update</button>
+            <button type='button' disabled={disableBtn} onClick={() => deleteTask()} className="secondary-btn">Delete</button>
         </form>
         <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </>

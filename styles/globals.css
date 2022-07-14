@@ -109,6 +109,10 @@ a:hover {
   background-color: var(--primary-color);
 }
 
+button:disabled {
+  opacity: .6;
+}
+
 .primary-btn {
   margin: 10px 5px;
   padding: 10px 30px;
@@ -171,7 +175,8 @@ option {
 }
 
 input[type="datetime-local"],
-input[type="date"] {
+input[type="date"],
+input[type="file"] {
   color-scheme: dark;
   resize: none;
 }

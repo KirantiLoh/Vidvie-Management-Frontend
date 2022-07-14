@@ -25,6 +25,7 @@
 
 .item {
     flex: 1 1 auto;
+    margin-left: 10px;
 }
 
 .itemTitle {
@@ -50,9 +51,24 @@
     color: #fff;
 }
 
+.extraDetails {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.extraDetails p {
+    flex: 1 1 0;
+    min-width: 200px;
+    margin-right: 10px;
+}
+
 @media screen and (max-width: 560px) {
     .itemTitle {
         max-width: 20ch;
         width: 100%;
+    }
+    .items li {
+        flex-direction: column;
     }
 }
