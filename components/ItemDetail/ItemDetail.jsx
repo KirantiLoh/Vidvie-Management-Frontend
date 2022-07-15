@@ -123,9 +123,9 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         <div className={styles.itemDetail}>
             <Title text={name}/>
             {image ?
-            <div className={styles.imageContainer}>
-                 <Image src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
-            </div>: null}
+            <ImageContainer className={styles.imageContainer} width={250} height={250}>
+              <Image priority src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
+            </ImageContainer>: null}
             <p>Borrowed : {borrowed}</p>
             <p>Broken : {broken}</p>
             <p>Condition : {condition}</p>
