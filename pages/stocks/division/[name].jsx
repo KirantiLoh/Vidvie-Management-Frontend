@@ -183,7 +183,7 @@ const StockPage = () => {
             </div>
           </div>
           <input type="text" value={searchQuery} placeholder="Search" onChange={e => setSearchQuery(e.target.value)} />
-          <Items division={name} setRefetching={setRefetching} items={data.filter(item => item.name.toLowerCase().includes(searchQuery))} isLeader={user.username === data[0].division?.leader?.user.username}/>
+          <Items division={name} setRefetching={setRefetching} items={data.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))} isLeader={user.username === data[0].division?.leader?.user.username}/>
         </> : 
         <div className="upper">
           <h3>This division has no items...</h3>
