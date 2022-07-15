@@ -2,7 +2,7 @@ import  { useState, useEffect, useContext, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { withProtected } from '@hoc/route'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faFilter, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faFilter, faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import axios from 'axios'
 import Items from '@components/Items/Items'
@@ -31,6 +31,7 @@ const StockPage = () => {
     const [showFilterForm, setShowFilterForm] = useState(false)
     const [disablePaginations, setDisablePaginations] = useState(false)
     const [disableBtn, setDisableBtn] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
 
     const [itemName, setItemName] = useState('')
     const [itemFunction, setItemFunction] = useState('')
@@ -152,7 +153,6 @@ const StockPage = () => {
             <option value="Bad">Bad</option>
           </select>
         </form>
-        
         {user.leader_of && user?.leader_of?.toLowerCase().replace(' ', '-') === name ? 
           <form onSubmit={handleSubmit} style={{height: showAddItemForm ? '560px' : '0', overflowY: showAddItemForm ? 'auto' : 'hidden'}}>
             <h2 className='secondary-title'>Add New Item</h2>
@@ -182,7 +182,8 @@ const StockPage = () => {
               <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
             </div>
           </div>
-          <Items division={name} setRefetching={setRefetching} items={data} isLeader={user.username === data[0].division?.leader?.user.username}/>
+          <input type="text" value={searchQuery} placeholder="Search" onChange={e => setSearchQuery(e.target.value)} />
+          <Items division={name} setRefetching={setRefetching} items={data.filter(item => item.name.toLowerCase().includes(searchQuery))} isLeader={user.username === data[0].division?.leader?.user.username}/>
         </> : 
         <div className="upper">
           <h3>This division has no items...</h3>
