@@ -70,6 +70,8 @@ export const AuthProvider = ({children}) => {
                 setIsAuthenticated(true)
                 setLoading(false)
                 return data.access
+            } else {
+                logoutUser()
             }
         } catch (err) {
             console.error(err)

@@ -93,10 +93,10 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         }
     }
 
-    const handleStockChange = (e) => {
+    const handleNumberChange = (e, setter) => {
         e.preventDefault()
         if (Number.isNaN(Number(e.target.value))) return
-        setStock(e.target.value)
+        setter(e.target.value)
       }
 
       useEffect(() => {
@@ -123,11 +123,12 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <ImageContainer className={styles.imageContainer} width={250} height={250}>
                  <Image priority src={image ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}` : NoImageAvailable} alt={name} layout='fill' objectFit='cover' /> 
             </ImageContainer>
+            <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
+            <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
+            <p>Stock : {stock}</p>
             <p>Borrowed : {borrowed}</p>
             <p>Broken : {broken}</p>
             <p>Condition : {condition}</p>
-            <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
-            <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
             <p>Description : {itemFunction}</p>
         </div>
     }>
@@ -142,13 +143,14 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
             <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
             <p>Borrowed : {borrowed}</p>
-            <p>Broken : {broken}</p>
             <label htmlFor={styles['name']}>Name</label>
             <input id={styles['name']} value={name} onChange={e => setName(e.target.value)} required type="text" placeholder='Title' />
             <label htmlFor="">Stock</label>
-            <input required type="number" value={stock} onChange={handleStockChange} />
+            <input required type="number" value={stock} onChange={e => handleNumberChange(e, setStock)} />
+            <label htmlFor='broken'>Broken</label>
+            <input type="number" required disabled id="broken" value={broken} onChange={e => setBroken(e.target.value)} />
             <label htmlFor={styles['priority']}>Condition</label>
-            <select required value={condition} onChange={(e) => setCondition(e.target.value)}>
+            <select required value={condition} onChange={(e) => handleNumberChange(e, setBroken)}>
               <option value="" hidden disabled>Condition</option>
               <option value="Good">Good</option>
               <option value="Second">Second</option>
