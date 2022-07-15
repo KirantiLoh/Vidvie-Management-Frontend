@@ -2,6 +2,8 @@ import styles from './Items.module.css'
 import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
+import ImageContainer from '@components/ImageContainer/ImageContainer'
+import NoImageAvailable from '@public/no-image-available.png'
 
 const Items = ({items, isLeader, setRefetching}) => {
 
@@ -24,7 +26,9 @@ const Items = ({items, isLeader, setRefetching}) => {
     {items.map((item, index) => {
         return (
             <li key={index}>
-                {item.image ? <Image src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${item.image}`} alt={item.name} width={80} height={80} style={{borderRadius: '50%'}}/> : null}
+              <ImageContainer width={80} height={80}>
+                  <Image src={item.image ?`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${item.image}` : NoImageAvailable} alt={item.name} layout='fill' style={{borderRadius: '50%'}}/> 
+              </ImageContainer>
                 <div className={styles.item}>
                     <div className={styles.upperDetail}>
                         <h3 className={styles.itemTitle}>

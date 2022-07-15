@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Items from '@components/Items/Items'
 import Image from 'next/image'
+import ImageContainer from '@components/ImageContainer/ImageContainer'
 
 const ItemDetail = ({items, setRefetchRequest}) => {
 
@@ -137,9 +138,9 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         <form onSubmit={e => handleSubmit(e)} className={styles.addItemForm}>
             <Title text={`Edit Item : ${name}`}/>
             {image ?
-            <div className={styles.imageContainer}>
-                 <Image src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
-            </div>: null}
+            <ImageContainer className={styles.imageContainer} width={250} height={250}>
+                 <Image priority src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
+            </ImageContainer>: null}
             <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
             <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
             <p>Borrowed : {borrowed}</p>
