@@ -9,6 +9,7 @@ import axios from 'axios'
 import Items from '@components/Items/Items'
 import Image from 'next/image'
 import ImageContainer from '@components/ImageContainer/ImageContainer'
+import NoImageAvailable from '@public/no-image-available.png'
 
 const ItemDetail = ({items, setRefetchRequest}) => {
 
@@ -17,6 +18,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
     const router = useRouter()
 
     const imageRef = useRef()
+    const btnRef = useRef()
 
     const [id, setId] = useState(null)
     const [name, setName] = useState('')
@@ -34,7 +36,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
     const [message, setMessage] = useState('')
     const [disableBtn, setDisableBtn] = useState(false)
 
-      const handleSubmit = async (e) => {
+      const handleSubmit = async (e, image) => {
         e.preventDefault()
         setDisableBtn(true)
         if (!name || !itemFunction || !condition || stock < 0) {
@@ -46,7 +48,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         formData.append("function", itemFunction)
         formData.append("condition", condition)
         formData.append("stock", stock)
-        formData.append("image", itemImage)
+        image ? formData.append("image", image) : null
 
       try {
         let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/${id}`, 
@@ -96,10 +98,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         if (Number.isNaN(Number(e.target.value))) return
         setStock(e.target.value)
       }
-    
-      const handleImageChange = (e) => {
-        setItemImage(e.target.files[0])
-      }
 
       useEffect(() => {
         if (items.length > 0) {
@@ -122,10 +120,9 @@ const ItemDetail = ({items, setRefetchRequest}) => {
     <RenderIf isTrue={user.username === requestor?.leader?.user.username} otherChoice={
         <div className={styles.itemDetail}>
             <Title text={name}/>
-            {image ?
             <ImageContainer className={styles.imageContainer} width={250} height={250}>
-              <Image priority src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
-            </ImageContainer>: null}
+                 <Image priority src={image ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}` : NoImageAvailable} alt={name} layout='fill' objectFit='cover' /> 
+            </ImageContainer>
             <p>Borrowed : {borrowed}</p>
             <p>Broken : {broken}</p>
             <p>Condition : {condition}</p>
@@ -135,20 +132,19 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         </div>
     }>
     <>
-        <form onSubmit={e => handleSubmit(e)} className={styles.addItemForm}>
-            <Title text={`Edit Item : ${name}`}/>
-            {image ?
-            <ImageContainer className={styles.imageContainer} width={250} height={250}>
-                 <Image priority src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}`} alt={name} layout='fill' objectFit='cover' /> 
-            </ImageContainer>: null}
+          <Title text={`Edit Item : ${name}`}/>
+          <ImageContainer className={styles.imageContainer} width={250} height={250}>
+            <label htmlFor="image" className={styles.changePhoto}>Change Photo</label>
+            <Image priority src={image ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_BUCKET}/${image}` : NoImageAvailable} alt={name} layout='fill' objectFit='cover' /> 
+          </ImageContainer>
+          <input className={styles.imageInputField} disabled={disableBtn} type="file" ref={imageRef} onChange={e => handleSubmit(e, e.target.files[0])} id="image" accept='image/jpeg,image/jpg,image/png'/>
+        <form onSubmit={handleSubmit} className={styles.addItemForm}>
             <p>Belongs to :  {requestor?.name ? requestor.name : requestor}</p>
             <p>Added on : {(new Date(dateAdded)).toLocaleString()}</p>
             <p>Borrowed : {borrowed}</p>
             <p>Broken : {broken}</p>
             <label htmlFor={styles['name']}>Name</label>
             <input id={styles['name']} value={name} onChange={e => setName(e.target.value)} required type="text" placeholder='Title' />
-            <label htmlFor="image">Photo</label>
-            <input type="file" ref={imageRef} onChange={handleImageChange} id="image" accept='image/jpeg,image/jpg,image/png'/>
             <label htmlFor="">Stock</label>
             <input required type="number" value={stock} onChange={handleStockChange} />
             <label htmlFor={styles['priority']}>Condition</label>
@@ -160,7 +156,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             </select>
             <label htmlFor={styles['desc']}>Description</label>
             <textarea id={styles['desc']} value={itemFunction} onChange={e => setItemFunction(e.target.value)} required placeholder='Function' cols="30" rows="10"></textarea>
-            <button type="submit" disabled={disableBtn} className='primary-btn'>Update</button>
+            <button type="submit"  ref={btnRef} disabled={disableBtn} className='primary-btn'>Update</button>
             <button type='button' disabled={disableBtn} onClick={() => deleteItem()} className="secondary-btn">Delete</button>
         </form>
         <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
