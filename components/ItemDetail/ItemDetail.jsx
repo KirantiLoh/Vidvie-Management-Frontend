@@ -24,7 +24,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
     const [name, setName] = useState('')
     const [itemFunction, setItemFunction] = useState('')
     const [image, setImage] = useState('')
-    const [itemImage, setItemImage] = useState('')
     const [stock, setStock] = useState(0)
     const [borrowed, setBorrowed] = useState(0)
     const [broken, setBroken] = useState(0)
@@ -48,6 +47,7 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         formData.append("function", itemFunction)
         formData.append("condition", condition)
         formData.append("stock", stock)
+        formData.append("broken", broken)
         image ? formData.append("image", image) : null
 
       try {
@@ -71,7 +71,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             setMessage(err.response.data.message)
             setModalType('error')
         } finally {
-            setItemImage('')
             imageRef.current.value=''
             setShowModal(true)
             setRefetchRequest(true)
@@ -93,10 +92,16 @@ const ItemDetail = ({items, setRefetchRequest}) => {
         }
     }
 
-    const handleNumberChange = (e, setter) => {
+    const handleStockChange = (e) => {
         e.preventDefault()
-        if (Number.isNaN(Number(e.target.value))) return
-        setter(e.target.value)
+        if (Number.isNaN(Number(e.target.value)) ||  e.target.value < 0) return
+        setStock(e.target.value)
+      }
+
+      const handleBrokenChange = (e) => {
+        e.preventDefault()
+        if (Number.isNaN(Number(e.target.value)) ||  e.target.value < 0) return
+        setBroken(e.target.value)
       }
 
       useEffect(() => {
@@ -146,11 +151,11 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <label htmlFor={styles['name']}>Name</label>
             <input id={styles['name']} value={name} onChange={e => setName(e.target.value)} required type="text" placeholder='Title' />
             <label htmlFor="">Stock</label>
-            <input required type="number" value={stock} onChange={e => handleNumberChange(e, setStock)} />
+            <input required type="number" value={stock} onChange={handleStockChange} />
             <label htmlFor='broken'>Broken</label>
-            <input type="number" required disabled id="broken" value={broken} onChange={e => setBroken(e.target.value)} />
+            <input type="number" required id="broken" value={broken} onChange={handleBrokenChange} />
             <label htmlFor={styles['priority']}>Condition</label>
-            <select required value={condition} onChange={(e) => handleNumberChange(e, setBroken)}>
+            <select required value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value="" hidden disabled>Condition</option>
               <option value="Good">Good</option>
               <option value="Second">Second</option>

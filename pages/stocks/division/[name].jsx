@@ -125,7 +125,7 @@ const StockPage = () => {
 
     const handleStockChange = (e) => {
       e.preventDefault()
-      if (Number.isNaN(Number(e.target.value))) return
+      if (Number.isNaN(Number(e.target.value)) ||  e.target.value < 0) return
       setStock(e.target.value)
     }
   
