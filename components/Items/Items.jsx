@@ -10,7 +10,7 @@ const Items = ({items, isLeader, setRefetching}) => {
     const changeItemCondition = async (e, item) => {
       e.preventDefault()
       await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/${item.id}`,
-      {"name": item.name, "condition": e.target.value, "function": item.function, "stock": item.stock})
+      {"name": item.name, "condition": e.target.value, "function": item.function, "stock": item.stock, "broken": item.broken})
       setRefetching(true)
     }
 
