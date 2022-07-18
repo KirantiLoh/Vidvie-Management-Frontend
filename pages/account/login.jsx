@@ -3,7 +3,6 @@ import styles from '@styles/LoginPage.module.css'
 import { AuthContext } from '@context/AuthContext'
 import { withPublic } from '@hoc/route'
 import LoginImg from '@public/login-img.jpg'
-import LogoImg from '@public/logo.png'
 import Image from 'next/image'
 import Modal from '@components/Modal/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +10,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 const LoginPage = () => {
 
-  const { loginUser, setLoading } = useContext(AuthContext)
+  const { loginUser } = useContext(AuthContext)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -19,6 +18,7 @@ const LoginPage = () => {
   const [showModal, setShowModal] = useState(false)
   const [fieldType, setFieldType] = useState('password')
   const [iconType, setIconType] = useState(faEye)
+  const [disableBtn, setDisableBtn] = useState(false)
 
   const handleClick = () => {
     if (fieldType === 'password') {
@@ -32,6 +32,7 @@ const LoginPage = () => {
   
   const login = async (e) => {
     e.preventDefault()
+    setDisableBtn(true)
     if (!username || !password) return
     try {
       const [error, status] = await loginUser(username, password)
@@ -44,6 +45,7 @@ const LoginPage = () => {
     } catch (err) {
       console.log(err)
     }
+    setDisableBtn(false)
   }
 
   return (
@@ -61,7 +63,7 @@ const LoginPage = () => {
             <input id={styles['password_field']} type={fieldType} className={styles.passwordField} placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
             <span className={styles.showPassword} onClick={() => handleClick()}><FontAwesomeIcon icon={iconType}/></span>
           </div>
-            <button type="submit" disabled={!username || !password} className={`${styles.loginBtn} primary-btn`}>Login</button>
+            <button type="submit" disabled={!username || !password || disableBtn} className={`${styles.loginBtn} primary-btn`}>Login</button>
         </form>
       </div>
       <div className={styles.imageContainer}>
