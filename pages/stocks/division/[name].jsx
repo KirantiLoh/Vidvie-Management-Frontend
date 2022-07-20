@@ -18,6 +18,7 @@ const StockPage = () => {
 
     const imageRef = useRef()
 
+    const [itemCount, setItemCount] = useState(0)
     const [data, setData] = useState([])
     const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`)
     const [nextPage, setNextPage] = useState('')
@@ -59,6 +60,7 @@ const StockPage = () => {
         let response = await axios.get(currentPage)
         let data = await response.data
         if (response.status === 200) {
+          setItemCount(data.count)
           setData(data.results)
           setNextPage(data.next)
           setPreviousPage(data.previous)
@@ -176,7 +178,7 @@ const StockPage = () => {
         {data?.length > 0  ? 
         <>
           <div className="upper">
-            <h2 className="secondary-title">Items</h2>
+            <h2 className="secondary-title">Items - {itemCount}</h2>
             <div>
               {user.username === data[0].division?.leader?.user.username ? <span onClick={() => setShowAddItemForm(!showAddItemForm)}><FontAwesomeIcon icon={faPlus}/></span> : null}
               <span onClick={() => setShowFilterForm(!showFilterForm)}><FontAwesomeIcon icon={faFilter}/></span>
