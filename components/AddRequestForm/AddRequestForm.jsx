@@ -1,12 +1,13 @@
-import Modal from '@components/Modal/Modal'
 import { AuthContext } from '@context/AuthContext'
 import axios from 'axios'
 import  { useContext, useState, useEffect } from 'react'
 import styles from './AddRequestForm.module.css'
+import { ModalContext } from '@context/ModalContext'
 
 const AddRequestForm = () => {
 
     const { user } = useContext(AuthContext)
+    const { setShowModal, setModalType, setMessage } = useContext(ModalContext)
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -15,9 +16,6 @@ const AddRequestForm = () => {
     const [requestor, setRequestor] = useState('')
     const [requestee, setRequestee] = useState('')
     const [divisionsChoices, setDivisionsChoices] = useState([])
-    const [showModal, setShowModal] = useState(false)
-    const [modalType, setModalType] = useState('')
-    const [message, setMessage] = useState('')
 
 
     const handleSubmit = async (e) => {
@@ -112,7 +110,6 @@ const AddRequestForm = () => {
             <button type="submit" className='primary-btn'>Add</button>
             <button type='reset' onClick={resetForm} className='secondary-btn'>Reset</button>
         </form>
-        <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </>
   )
 }

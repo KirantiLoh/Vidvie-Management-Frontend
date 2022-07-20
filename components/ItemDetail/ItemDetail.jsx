@@ -1,9 +1,9 @@
 import RenderIf from '@components/RenderIf'
 import Title from '@components/Title'
 import { AuthContext } from '@context/AuthContext'
+import { ModalContext } from '@context/ModalContext'
 import  { useState, useContext, useEffect, useRef } from 'react'
 import styles from './ItemDetail.module.css'
-import Modal from '@components/Modal/Modal'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Items from '@components/Items/Items'
@@ -14,6 +14,7 @@ import NoImageAvailable from '@public/no-image-available.png'
 const ItemDetail = ({items, setRefetchRequest}) => {
 
     const { user } = useContext(AuthContext)
+    const { setShowModal, setModalType, setMessage } = useContext(ModalContext)
 
     const router = useRouter()
 
@@ -30,9 +31,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
     const [dateAdded, setDateAdded] = useState('')
     const [requestor, setRequestor] = useState('')
     const [condition, setCondition] = useState('')
-    const [showModal, setShowModal] = useState(false)
-    const [modalType, setModalType] = useState('')
-    const [message, setMessage] = useState('')
     const [disableBtn, setDisableBtn] = useState(false)
 
       const handleSubmit = async (e, image) => {
@@ -137,7 +135,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <p>Description : {itemFunction}</p>
         </div>
     }>
-    <>
           <Title text={`Edit Item : ${name}`}/>
           <ImageContainer className={styles.imageContainer} width={250} height={250}>
             <label htmlFor="image" className={styles.changePhoto}>Change Photo</label>
@@ -166,8 +163,6 @@ const ItemDetail = ({items, setRefetchRequest}) => {
             <button type="submit"  ref={btnRef} disabled={disableBtn} className='primary-btn'>Update</button>
             <button type='button' disabled={disableBtn} onClick={() => deleteItem()} className="secondary-btn">Delete</button>
         </form>
-        <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
-    </>
     </RenderIf>
     {items.length > 1 ? 
     <>

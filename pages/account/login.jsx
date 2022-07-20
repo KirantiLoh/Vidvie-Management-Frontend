@@ -4,18 +4,17 @@ import { AuthContext } from '@context/AuthContext'
 import { withPublic } from '@hoc/route'
 import LoginImg from '@public/login-img.jpg'
 import Image from 'next/image'
-import Modal from '@components/Modal/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { ModalContext } from '@context/ModalContext'
 
 const LoginPage = () => {
 
   const { loginUser } = useContext(AuthContext)
+  const { setShowModal, setModalType, setMessage } = useContext(ModalContext)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
-  const [showModal, setShowModal] = useState(false)
   const [fieldType, setFieldType] = useState('password')
   const [iconType, setIconType] = useState(faEye)
   const [disableBtn, setDisableBtn] = useState(false)
@@ -34,17 +33,14 @@ const LoginPage = () => {
     e.preventDefault()
     setDisableBtn(true)
     if (!username || !password) return
-    try {
-      const [error, status] = await loginUser(username, password)
-      if (error && status === 401) {
-        setMessage(error.message)
-        setShowModal(true)
-        setUsername('')
-        setPassword('')
-      }
-    } catch (err) {
-      console.log(err)
+    const [error, status] = await loginUser(username, password)
+    if (error && status === 401) {
+      setModalType('error')
+      setMessage(error.message)
+      setUsername('')
+      setPassword('')
     }
+    setShowModal(true)
     setDisableBtn(false)
   }
 
@@ -69,7 +65,6 @@ const LoginPage = () => {
       <div className={styles.imageContainer}>
         <Image className={styles.loginImage} src={LoginImg} alt={"Ruko Elang Laut"} objectFit='cover' layout='fill' priority/>
       </div>
-      <Modal type="error" message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
     </div>
   )
 }

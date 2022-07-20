@@ -6,9 +6,11 @@ import styles from './TaskDetail.module.css'
 import Modal from '@components/Modal/Modal'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { ModalContext } from '@context/ModalContext'
 
 const TaskDetail = ({taskDetail, setRefetchRequest}) => {
 
+    const { setShowModal, setModalType, setMessage } = useContext(ModalContext)
     const { user } = useContext(AuthContext)
 
     const router = useRouter()
@@ -25,9 +27,6 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
     const [currentRequestor, setCurrentRequestor] = useState('')
     const [currentRequestee, setCurrentRequestee] = useState('')
     const [divisionsChoices, setDivisionsChoices] = useState([])
-    const [showModal, setShowModal] = useState(false)
-    const [modalType, setModalType] = useState('')
-    const [message, setMessage] = useState('')
     const [disableBtn, setDisableBtn] = useState(false)
 
     const getDivisions = async () => {
@@ -111,7 +110,6 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             <p>Description : {description}</p>
         </div>
     }>
-        <>
         <form onSubmit={e => handleSubmit(e)} className={styles.addRequestForm}>
             <Title text={`Edit Request : ${title}`}/>
             <p>Requested on : {(new Date(dateAdded)).toLocaleString()}</p>
@@ -149,8 +147,6 @@ const TaskDetail = ({taskDetail, setRefetchRequest}) => {
             <button type="submit" disabled={disableBtn} className='primary-btn'>Update</button>
             <button type='button' disabled={disableBtn} onClick={() => deleteTask()} className="secondary-btn">Delete</button>
         </form>
-        <Modal type={modalType} message={message} showModal={showModal} onClose={() => setShowModal(false)}/>
-    </>
     </RenderIf>
   )
 }

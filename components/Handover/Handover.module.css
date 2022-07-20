@@ -1,0 +1,76 @@
+.handovers {
+    list-style: none;
+}
+
+.handovers li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--tertiary-background-color);
+    border-radius: 3px;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+}
+
+.handovers li:hover {
+    background-color: var(--secondary-background-color);
+}
+
+.handovers li p {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.handoverContainer {
+    flex: 1 1 auto;
+}
+
+.handoverTitle {
+    max-width: 40ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+}
+
+.upperDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.priorityAndStatus {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 5px 0;
+}
+
+.approved {
+    padding: 5px 15px;
+    margin-right: 10px;
+    border-radius: 30px;
+    width: max-content;
+    color: #fff;
+    border: none;
+}
+
+.extraDetails {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.extraDetails p {
+    flex: 1 1 0;
+    min-width: 200px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 560px) {
+    .taskTitle {
+        max-width: 20ch;
+        width: 100%;
+    }
+}

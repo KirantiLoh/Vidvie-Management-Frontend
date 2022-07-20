@@ -34,7 +34,7 @@ const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, setRefetching})
   }
 
   const setStatusColor = (status) => {
-    if (status === 'Not Started') return '#910810'
+    if (status === 'Not Started') return 'var(--status-not-started-background-color)'
     if (status === 'In Progress') return 'var(--status-in-progress-background-color)'
     if (status === 'Shipping') return 'var(--status-shipping-background-color)' 
     if (status === 'Finished') return 'var(--status-finished-background-color)'

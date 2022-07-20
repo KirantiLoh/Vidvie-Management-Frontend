@@ -5,6 +5,7 @@ config.autoAddCss = false
 import { AuthProvider } from '@context/AuthContext'
 import Head from 'next/head'
 import { AxiosProvider } from '@context/AxiosContext'
+import { ModalProvider } from '@context/ModalContext'
 
 function MyApp({ Component, pageProps }) {
 
@@ -19,11 +20,13 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content='#F36D25'/>
         <meta name='viewport' content={`width=device-width, initial-scale=1, viewport-fit=cover${typeof window !== 'undefined' && window?.navigator?.userAgentData?.mobile ? ', user-scalable=no' : ''}`} />
       </Head>
+      <ModalProvider>
         <AuthProvider>
           <AxiosProvider>
             <Component {...pageProps} />
           </AxiosProvider>
         </AuthProvider>
+      </ModalProvider>
     </>
   )
 }

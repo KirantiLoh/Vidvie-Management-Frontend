@@ -4,7 +4,7 @@ import styles from './SideNav.module.css'
 import Logo from '@public/logo.png'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faComputer, faSignIn, faTimes, faPaintBrush, faUserFriends, faTruck, faUsersCog, faGlobe, faTags, faStore, faFolder, faUsersBetweenLines, faEllipsis, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faComputer, faPeopleCarryBox, faSignIn, faTimes, faPaintBrush, faUserFriends, faTruck, faUsersCog, faGlobe, faTags, faStore, faFolder, faUsersBetweenLines, faEllipsis, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 import VidvieLogo from '@public/logo-VIDVIE-icon.png'
 import RenderIf from '@components/RenderIf'
 import { AuthContext } from '@context/AuthContext'
@@ -110,14 +110,20 @@ const SideNav = () => {
             <li>
               <h2>Staffs</h2>
             </li>
-          <li>
-            <Link href="/divisions">
-              <a><FontAwesomeIcon icon={faUsersBetweenLines}/> Divisions</a>
-            </Link>
-          </li>
+          
           <li>
             <Link href="/stocks">
               <a><FontAwesomeIcon icon={faBoxOpen}/> Stocks</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/handover">
+              <a><FontAwesomeIcon icon={faPeopleCarryBox}/> Handover</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/divisions">
+              <a><FontAwesomeIcon icon={faUsersBetweenLines}/> Divisions</a>
             </Link>
           </li>
           <li>
