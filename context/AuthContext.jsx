@@ -1,13 +1,16 @@
-import  {createContext, useState, useEffect, useCallback } from 'react'
+import  {createContext, useState, useEffect, useCallback, useContext} from 'react'
 import { useRouter } from 'next/router'
 import jwtDecode from 'jwt-decode'
 import LoadingScreen from '@components/LoadingScreen/LoadingScreen'
 import SideNav from '@components/SideNav/SideNav'
 import AddRequestBtn from '@components/AddRequestBtn/AddRequestBtn'
+import { ModalContext } from './ModalContext'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
+
+    const { setShowModal, setModalType, setMessage } = useContext(ModalContext)
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [authToken, setAuthToken] = useState({})
@@ -32,8 +35,11 @@ export const AuthProvider = ({children}) => {
                 const userData = jwtDecode(data.access)
                 setUser({"username":userData.username, "name":userData.name, "division":userData.division, "leader_of": userData.leader_of})
                 setIsAuthenticated(true)
+                setMessage("Login successful")
+                setModalType('success')
+                setShowModal(true)
                 router.replace('/')
-                return ["Login successful", response.status]
+                return ["Login successful", 200]
             } else {
                 return [data, response.status]
             }
