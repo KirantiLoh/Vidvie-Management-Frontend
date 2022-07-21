@@ -24,7 +24,7 @@ const DivisionsPage = () => {
   return (
     <div>
       <Title text={"Divisions"}/>
-      <Divisions divisions={divisions}/>
+      <Divisions divisions={divisions} to="divisions"/>
     </div>
   )
 }

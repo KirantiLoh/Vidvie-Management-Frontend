@@ -86,10 +86,10 @@ const TaskByDivision = () => {
 
     useEffect(() => {
         if (router.isReady) {
-            const { division } = router.query
-            setDivision(prev => prev = division)
+            const { name } = router.query
+            setDivision(name)
             setPageNumber(1)
-            setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${query}/division/${division}`)
+            setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${query}/division/${name}`)
         }
     }, [router.isReady, router.query, query])
     
@@ -137,8 +137,8 @@ const TaskByDivision = () => {
           <button className="secondary-btn" onClick={() => clearFilter()}>Clear</button>
         </form>
         {query === 'tasks' 
-        ? <Tasks tasks={datas} division={division} isLeader={datas[0]?.requestee_division?.name === user.division} inTaskbyDivisionPage={true} setRefetching={setRefetchRequest}/>
-        : <Requests requests={datas} division={division} isLeader={datas[0]?.requestor_division?.name === user.division} inTaskbyDivisionPage={true}setRefetching={setRefetchRequest}/>
+        ? <Tasks tasks={datas} isLeader={datas[0]?.requestee_division?.name === user.division} inTaskbyDivisionPage={true} setRefetching={setRefetchRequest}/>
+        : <Requests requests={datas} isLeader={datas[0]?.requestor_division?.name === user.division} inTaskbyDivisionPage={true}setRefetching={setRefetchRequest}/>
         }
         {datas.length > 0 ?
           <ul className="paginations">

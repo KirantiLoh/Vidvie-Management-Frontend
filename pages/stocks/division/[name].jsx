@@ -20,7 +20,7 @@ const StockPage = () => {
 
     const [itemCount, setItemCount] = useState(0)
     const [data, setData] = useState([])
-    const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`)
+    const [currentPage, setCurrentPage] = useState(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/division/${name}`)
     const [nextPage, setNextPage] = useState('')
     const [previousPage, setPreviousPage] = useState('')
     const [pageNumber, setPageNumber] = useState(1)
@@ -84,7 +84,7 @@ const StockPage = () => {
       itemImage ? formData.append("image", itemImage) : null
 
       try {
-        let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}`, 
+        let response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/division/${name}`, 
           formData, {
             headers: {
               "Content-Type": "multipart/form-data"
@@ -117,7 +117,7 @@ const StockPage = () => {
 
     const filterItem = (e) => {
       e.preventDefault()
-      setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${name}?condition=${e.target.value}`)
+      setCurrentPage(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/division/${name}?condition=${e.target.value}`)
       setShowFilterForm(false)
     }
 

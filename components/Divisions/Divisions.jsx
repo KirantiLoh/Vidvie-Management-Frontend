@@ -2,14 +2,14 @@ import Link from 'next/link'
 
 import styles from './Divisions.module.css'
 
-const Divisions = ({divisions}) => {
+const Divisions = ({divisions, to}) => {
   return (
     <ul className={styles.divisions}>
         {divisions.length > 0 ? divisions.map(division => {
             return (
                 <li key={division.id}>
                     <h2>
-                        <Link href={`/divisions/${division.slug}`}>
+                        <Link href={`/${to}/${division.slug}`}>
                             {division.name}
                         </Link>
                     </h2>

@@ -1,4 +1,4 @@
-import StockByDivisions from '@components/StockByDivision/StockByDivisions'
+import Divisions from '@components/Divisions/Divisions'
 import Title from '@components/Title'
 import { withProtected } from '@hoc/route'
 import axios from 'axios'
@@ -24,7 +24,7 @@ const StocksPage = () => {
   return (
     <div>
       <Title text={"Stocks By Division"}/>
-      <StockByDivisions divisions={divisions} />
+      <Divisions divisions={divisions} to="stocks/division" />
     </div>
   )
 }

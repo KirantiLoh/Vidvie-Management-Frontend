@@ -3,7 +3,7 @@ import styles from './Tasks.module.css'
 import Link from 'next/link'
 import axios from 'axios'
 
-const Tasks = ({tasks, division, isLeader, inTaskbyDivisionPage, setRefetching}) => {
+const Tasks = ({tasks, isLeader, inTaskbyDivisionPage, setRefetching}) => {
 
   const changeTaskStatus = async (e, task) => {
     e.preventDefault()
