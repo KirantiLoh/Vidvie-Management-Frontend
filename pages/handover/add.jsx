@@ -42,7 +42,7 @@ const HandoverPage = () => {
 
   const getItemsByDivision = useCallback(async () => {
     setItem('')
-    let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/divisions/${requesteeDivision.toLowerCase().replace(' ', '-')}`)
+    let response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/stocks/division/${requesteeDivision.toLowerCase().replace(' ', '-')}`)
     let data = await response.data
     if (response.status === 200) {
       setItems(data.results)
